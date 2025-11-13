@@ -29,5 +29,6 @@ return {
 			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
 			vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Show buffer diagnostics list" })
 		end,
+		vim.keymap.set("n", "grn", vim.lsp.buf.rename, { desc = "LSP Rename Symbol" }),
 	},
 }

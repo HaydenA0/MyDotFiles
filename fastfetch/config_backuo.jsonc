@@ -9,14 +9,28 @@
 {
     "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
         "logo": {
-        "source": "/home/anasr/wallpapers/FastFetch/gruvy.txt",
-	"height": 7,
+        "source": "/home/anasr/wallpapers/FastFetch/gruvy.png",
+	"height": 10,
     },
     "display": {
         "separator": " :  "
     },
     "modules": [
+		{
+    "type": "custom",
+    "format": "\u001b[34mたばれ\u001b[0m"
+},
 
+        {
+            "type": "kernel",
+            "key": "KER  ",
+            "keyColor": "32",
+        },
+        {
+            "type": "os",
+            "key": "OSS  ",
+            "keyColor": "33",
+        },
         {
             "type": "battery",
             "key": "BATT  ",
@@ -28,6 +42,11 @@
             "key": "DIK  ",
             "keyColor": "38", 
         },
+		{
+    "type": "custom",
+    "format": "\u001b[31m愛してる\u001b[0m"
+}
+
 
 	
     ]

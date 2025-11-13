@@ -30,11 +30,11 @@ keymap("n", "<A-Left>", ":vertical resize -2<CR>", { noremap = true, desc = "Dec
 keymap("n", "<A-Right>", ":vertical resize +2<CR>", { noremap = true, desc = "Increase window width" })
 
 -- Tab Management
-keymap("n", "<A-f>", ":tabnew<CR>:b#<CR>:bwipeout #<CR>", { noremap = true, desc = "Move buffer to new tab" })
-keymap("n", "<A-1>", "1gt", { noremap = true, desc = "Go to tab 1" })
-keymap("n", "<A-2>", "2gt", { noremap = true, desc = "Go to tab 2" })
-keymap("n", "<A-3>", "3gt", { noremap = true, desc = "Go to tab 3" })
-keymap("n", "<A-4>", "4gt", { noremap = true, desc = "Go to tab 4" })
+-- keymap("n", "<A-f>", ":tabnew<CR>:b#<CR>:bwipeout #<CR>", { noremap = true, desc = "Move buffer to new tab" })
+-- keymap("n", "<A-1>", "1gt", { noremap = true, desc = "Go to tab 1" })
+-- keymap("n", "<A-2>", "2gt", { noremap = true, desc = "Go to tab 2" })
+-- keymap("n", "<A-3>", "3gt", { noremap = true, desc = "Go to tab 3" })
+-- keymap("n", "<A-4>", "4gt", { noremap = true, desc = "Go to tab 4" })
 
 -- Plugin Keymaps (Grouped by plugin)
 -- Telescope / Neoclip
@@ -46,4 +46,4 @@ end, { desc = "Open Neoclip registers" })
 keymap("n", "<C-/>", ":FloatermToggle<CR>", { desc = "Toggle floating terminal" })
 
 -- Custom Commands Keymaps
-keymap("n", "<A-S-Enter>", ":RunFile<CR>", { noremap = true, silent = true, desc = "Run C code " })
+-- keymap("n", "<C-S-Enter>", ":RunFile<CR>", { noremap = true, silent = true, desc = "Run C code " })

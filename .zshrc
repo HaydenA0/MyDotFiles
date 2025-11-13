@@ -1,10 +1,25 @@
-if [ -z "$KITTY_SCRIPT_RUNNING" ]; then
-  fastfetch
-fi
+bindkey -v
+rm -rf ~/Downloads/
+rm -rf ~/Desktop/
+(cat ~/.cache/wal/sequences &)
+fastfetch
+
+
+MARGIN=150
+NO_MARGIN=20
+# if [[ -z "$NVIM" ]]; then
+#   kitty @ set-spacing margin=$MARGIN 2>/dev/null
+# fi
+# nvim() {
+#   kitty @ set-spacing margin=$NO_MARGIN
+#   command nvim "$@"
+#   kitty @ set-spacing margin=$MARGIN
+# }
+
+
 setopt AUTO_CD
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-(cat ~/.cache/wal/sequences &)
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -31,17 +46,12 @@ zinit light junegunn/fzf
 
 
 
-alias count="ls -1 | wc -l"
-alias ls='exa -lh --group-directories-first --icons --git --color=always; num_files=$(exa --all --classify | wc -l); echo -e "\033[1;32mNumber of files:\033[0m \033[1;33m${num_files}\033[0m"'
-
+# alias ls='exa -l --group-directories-first --icons'
+alias ls='exa -l --no-user --no-time --group-directories-first --icons'
 alias lsa="exa -lh --total-size"
-alias lsaa="exa -lh --total-size -a"
-alias timer="~/scripts/timer.sh"
-alias zen="~/Zen/zen.linux-x86_64/zen/zen"
-alias todo="zen https://app.todoist.com/app/today"
 
 dup() {
-  kitty -e zsh >/dev/null 2>&1 &
+	kitten @ launch --type=tab --keep-focus zsh -lc "\cd \"$(zoxide query $(pwd))\"; exec zsh"
 }
 
 bright() {
@@ -52,7 +62,6 @@ bright() {
   brightnessctl set "$1"% 
 }
 
-alias bluetooth="blueberry"
 export PATH="$HOME/ghostty:$PATH"
 
 vol() {
@@ -66,9 +75,8 @@ vol() {
 
 ff() {
   local selected
-  selected=$(find ./ -mindepth 1 \
-  -not -path '*/.*' -not -name '.*' \
-  -not -path '*/__*' -not -name '__*' | fzf)
+
+  selected=$(fd . ./ -t f --min-depth 1 --exclude '.*' --exclude '__*' | fzf)
 
   if [[ -n "$selected" ]]; then
     if [[ -d "$selected" ]]; then
@@ -81,19 +89,24 @@ ff() {
 
 cf() {
   local selected
-  selected=$(find ~/ -mindepth 1 -type d \
-  -not -path '*/.*' -not -name '.*' \
-  -not -path '*/__*' -not -name '__*' | fzf)
+  # `fd` is much faster and the syntax is cleaner.
+  # It finds both files (-t f) and directories (-t d) by default.
+  # It ignores hidden files and .gitignore by default.
+  # We add --exclude to replicate your original logic.
+   selected=$(fd -t d --exclude '__pycache__' --exclude '.git' . ~ | fzf)
+  # selected=$(find -type d | fzf)
 
+  # The rest of the logic remains the same.
   if [[ -n "$selected" ]]; then
     if [[ -d "$selected" ]]; then
-      cd -- "$selected"
+      z -- "$selected"
     elif [[ -f "$selected" ]]; then
       nvim -- "$selected"
     fi
   fi
 }
 alias a="cf"
+alias q="ff"
 
 autoload -U colors && colors
 
@@ -127,34 +140,6 @@ eval "$(zoxide init zsh)"
 
 
 
-function ctl() {
-    local options="󰃠 Brightness Up\n󰃞 Brightness Down\n Volume Up\n Volume Down\n󰝟 Toggle Mute\n󰤨 Network Manager (nmtui)\n󰒓 ActivityWatch Service\n🔌 Shutdown\n Reboot"
-    
-    # Requires Nerd Fonts for icons to display correctly
-    local selected=$(echo -e "$options" | fzf --prompt="System Control > " --height=40% --border)
-
-    case "$selected" in
-        "󰃠 Brightness Up") brightnessctl set +5% ;;
-        "󰃞 Brightness Down") brightnessctl set 5%- ;;
-        " Volume Up") pamixer -i 5 ;;
-        " Volume Down") pamixer -d 5 ;;
-        "󰝟 Toggle Mute") pamixer -t ;;
-        "󰤨 Network Manager (nmtui)") nmtui ;;
-        "󰒓 ActivityWatch Service") systemctl --user status activitywatch.service ;;
-        "🔌 Shutdown") sudo shutdown now ;;
-        " Reboot") sudo reboot now ;;
-    esac
-}
-function conf() {
-  local config_files=$(find ~/.config -maxdepth 2 -type f | fzf --prompt="Edit Config > " --preview 'bat --color=always {}')
-  if [[ -n $config_files ]]; then
-    nvim "$config_files"
-  fi
-}
-alias instalp="sudo pacman -S"
-alias instaly="yay -S"
-alias update="sudo pacman -Syu"
-alias remov="sudo pacman -Rns"
 
 auto_env() {
   # Deactivate Python venv if leaving a directory with no .venv
@@ -173,27 +158,9 @@ auto_env() {
 # Register function to run on directory change
 chpwd_functions+=("auto_env")
 
-alias -s pdf='zathura'
-alias -s md='nvim'
-alias -s tex='nvim'
-alias -s py='nvim'
-alias -s c='nvim'
-alias -s cpp='nvim'
-alias -s js='nvim'
-alias -s json='nvim'
-alias -s conf='nvim'
-
-# For media files
-alias -s mp4='mpv'
-alias -s mkv='mpv'
-alias -s jpg='imv' # A simple image viewer for terminals/wayland
-alias -s png='imv'
-alias -s jpeg='imv'
 alias -s /="cd"
     
 
-# helkp function
-alias help='/home/anasr/scripts/./help.sh'
 
   
 function zle-keymap-select {
@@ -220,104 +187,7 @@ zle -N zle-keymap-select
 #
  
 # Function to copy file/folder paths to the Wayland clipboard (IMPROVED & MORE ROBUST)
-function copy() {
-  # Ensure wl-copy is available
-  if ! command -v wl-copy &> /dev/null; then
-    echo "Error: wl-copy not found. Please install wl-clipboard." >&2
-    return 1
-  fi
 
-  # Check if arguments are provided
-  if [ "$#" -eq 0 ]; then
-    echo "Usage: copy <file/folder> [file/folder...]" >&2
-    echo "Tip: Remember to quote filenames with special characters (e.g., copy 'my file!')" >&2
-    return 1
-  fi
-
-  local valid_paths=()
-  local has_error=0
-
-  # Loop through all provided arguments to validate them
-  for arg in "$@"; do
-    if [ -e "$arg" ]; then
-      # If the file or directory exists, add it to our list
-      valid_paths+=("$(realpath -- "$arg")")
-    else
-      # If it doesn't exist, print an error and mark that we had a problem
-      echo "Error: Cannot find file or folder: '$arg'" >&2
-      has_error=1
-    fi
-  done
-
-  # If no valid paths were found after checking all args, exit.
-  if [ ${#valid_paths[@]} -eq 0 ]; then
-    echo "No valid files or folders to copy." >&2
-    return 1
-  fi
-
-  # Join the array of valid paths with newlines, format as URIs,
-  # and pipe to wl-copy.
-  printf '%s\n' "${valid_paths[@]}" | sed 's,^,file://,' | wl-copy
-
-  # Provide user feedback on what was actually copied
-  echo "Copied ${#valid_paths[@]} item(s) to clipboard:"
-  printf '%s\n' "${valid_paths[@]}"
-
-  # Return a non-zero exit code if some files were not found
-  return $has_error
-}
- 
- 
- 
-# Function to paste files/folders from the Wayland clipboard (IMPROVED VERSION)
-function past() {
-  # Ensure wl-paste is available
-  if ! command -v wl-paste &> /dev/null; then
-    echo "Error: wl-paste not found. Please install wl-clipboard." >&2
-    return 1
-  fi
-
-  # Get the URI list from the clipboard
-  local clipboard_content=$(wl-paste)
-
-  if [[ -z "$clipboard_content" ]]; then
-    echo "Clipboard is empty." >&2
-    return 1
-  fi
-
-  # Process each line from the clipboard
-  echo "$clipboard_content" | while read -r uri; do
-    # Check if the line is a file URI
-    if [[ "$uri" != file://* ]]; then
-      echo "Skipping non-file URI: $uri"
-      continue
-    fi
-
-    # Remove the 'file://' prefix
-    local encoded_path=${uri#file://}
-
-    # URL-decode the path using Zsh's built-in parameter expansion `(%)`.
-    # This is more robust than `zmodload zsh/url`.
-    local decoded_path=${(%)encoded_path}
-
-    # Check if the source file/folder actually exists before trying to copy
-    if [ -e "$decoded_path" ]; then
-      echo "Pasting: $decoded_path"
-      # Use `cp -r` for recursive copy and `--` for safety
-      cp -r -- "$decoded_path" .
-    else
-      echo "Error: Source path not found: '$decoded_path'" >&2
-    fi
-  done
-}
-
-
-function wallpaper() {
-  wal -i "$1" --saturate 0.8 # Added saturate as you used it
-  # You can also add commands here to reload Waybar, mako, etc.
-  pkill hyprpaper
-  hyprpaper &
-}
 
 alias cr="c && reload"
 
@@ -338,11 +208,8 @@ bindkey '^[[Z' complete-word
 bindkey "$terminfo[kcbt]" menu-complete
 
 alias tim="tty-clock -x -s -c"
-alias download_audio="yt-dlp -f bestaudio"
-alias download_video="yt-dlp"
 alias class="hyprctl clients"
 alias jn="jupytext --to notebook"
-alias fm="yazi"
 
 
 
@@ -389,3 +256,11 @@ tman() {
 
 
 export PATH=$PATH:/home/anasr/.spicetify
+alias clear_fastfetch="rm -rf $HOME/.cache/fastfetch/ ; cr"
+pdf_slect() {
+  pdf=$(find . -name "*.pdf" -print0 | fzf --read0) && setsid zathura "$pdf" >/dev/null 2>&1 &
+
+}
+
+
+alias note="nvim $HOME/personal_vault/notes/"
