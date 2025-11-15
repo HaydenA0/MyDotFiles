@@ -2,7 +2,6 @@ bindkey -v
 rm -rf ~/Downloads/
 rm -rf ~/Desktop/
 (cat ~/.cache/wal/sequences &)
-fastfetch
 
 
 MARGIN=150
@@ -263,4 +262,18 @@ pdf_slect() {
 }
 
 
-alias note="nvim $HOME/personal_vault/notes/"
+
+
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+tmux new-session -A -s 1
+
+clear
+
+cpw() {
+    pwd | wl-copy
+}
+alias clipp="wl-copy"
+
+
+

@@ -2,6 +2,7 @@
 vim.o.swapfile = false
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.numberwidth = 1
 vim.opt.signcolumn = "no"
 vim.opt.fillchars:append({ eob = " " })
 vim.opt.guicursor = "n-v-c-i:block"
@@ -22,3 +23,4 @@ vim.diagnostic.config({
 	},
 	severity_sort = true,
 })
+vim.opt.numberwidth = #tostring(vim.fn.line("$")) + 1

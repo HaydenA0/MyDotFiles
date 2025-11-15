@@ -27,4 +27,4 @@
 !.zsh_history
 !.zshrc
 !install.sh
-
+!.tmux.conf
