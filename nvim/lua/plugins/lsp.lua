@@ -18,9 +18,6 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			vim.lsp.enable("lua_ls")
-			vim.lsp.enable("pyright")
-			vim.lsp.enable("clangd")
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
@@ -28,7 +25,7 @@ return {
 			vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
 			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
 			vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Show buffer diagnostics list" })
+			vim.keymap.set("n", "grn", vim.lsp.buf.rename, { desc = "LSP Rename Symbol" })
 		end,
-		vim.keymap.set("n", "grn", vim.lsp.buf.rename, { desc = "LSP Rename Symbol" }),
 	},
 }

@@ -23,4 +23,4 @@ vim.diagnostic.config({
 	},
 	severity_sort = true,
 })
-vim.opt.numberwidth = #tostring(vim.fn.line("$")) + 1
+-- vim.opt.numberwidth = #tostring(vim.fn.line("$")) + 1
