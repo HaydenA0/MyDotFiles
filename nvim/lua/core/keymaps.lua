@@ -39,7 +39,7 @@ keymap("n", "<A-Right>", ":vertical resize +2<CR>", { noremap = true, desc = "In
 -- Plugin Keymaps (Grouped by plugin)
 -- Telescope / Neoclip
 keymap("n", "<leader>r", function()
-	require("telescope").extensions.neoclip.default()
+  require("telescope").extensions.neoclip.default()
 end, { desc = "Open Neoclip registers" })
 
 -- Floaterm
@@ -47,3 +47,4 @@ keymap("n", "<C-/>", ":FloatermToggle<CR>", { desc = "Toggle floating terminal" 
 
 -- Custom Commands Keymaps
 -- keymap("n", "<C-S-Enter>", ":RunFile<CR>", { noremap = true, silent = true, desc = "Run C code " })
+--
