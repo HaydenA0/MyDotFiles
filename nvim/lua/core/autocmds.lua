@@ -5,12 +5,12 @@ local autocmd = vim.api.nvim_create_autocmd
 local MyAutoCmds = augroup("MyAutoCmds", { clear = true })
 
 -- Change CWD to the current file's directory
-autocmd("BufEnter", {
-	group = MyAutoCmds,
-	callback = function()
-		vim.cmd("silent! lcd %:p:h")
-	end,
-})
+-- autocmd("BufEnter", {
+-- 	group = MyAutoCmds,
+-- 	callback = function()
+-- 		vim.cmd("silent! lcd %:p:h")
+-- 	end,
+-- })
 
 -- Create a dedicated augroup for our custom highlight overrides.
 local highlight_group = vim.api.nvim_create_augroup("MyFlashHighlightFix", { clear = true })

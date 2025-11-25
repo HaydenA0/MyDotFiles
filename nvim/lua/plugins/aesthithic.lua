@@ -1,196 +1,33 @@
 -- return {
---
--- 	{
--- 		"rebelot/kanagawa.nvim",
--- 		lazy = false,
--- 		priority = 1000,
--- 		config = function()
--- 			require("kanagawa").setup({
--- 				transparent = true,
--- 				keywordStyle = { bold = true },
--- 				statementStyle = { bold = true },
--- 				theme = "wave",
--- 			})
--- 			vim.cmd("colorscheme kanagawa-wave")
--- 		end,
--- 	},
---
--- 	{
--- 		"nvim-treesitter/nvim-treesitter",
--- 		build = ":TSUpdate",
--- 		event = { "BufReadPost", "BufNewFile" },
--- 		config = function()
--- 			require("nvim-treesitter.configs").setup({
--- 				highlight = {
--- 					enable = true,
--- 					additional_vim_regex_highlighting = false,
--- 				},
--- 				indent = { enable = true },
--- 				ensure_installed = {
--- 					"lua",
--- 					"vim",
--- 					"vimdoc",
--- 					"bash",
--- 					"javascript",
--- 					"typescript",
--- 					"html",
--- 					"css",
--- 					"python",
--- 					"json",
--- 					"markdown",
--- 				},
--- 			})
--- 		end,
--- 	},
+-- 	"uZer/pywal16.nvim",
+-- 	-- for local dev replace with:
+-- 	-- dir = '~/your/path/pywal16.nvim',
+-- 	config = function()
+-- 		vim.cmd.colorscheme("pywal16")
+-- 	end,
 -- }
-
--- return {
---   "ellisonleao/gruvbox.nvim",
---   priority = 1000,
---   config = function()
---     require("gruvbox").setup({
---       -- Default options
---       terminal_colors = true, -- add neovim terminal colors
---       undercurl = true,
---       underline = true,
---       bold = true,
---       italic = {
---         strings = true,
---         emphasis = true,
---         comments = true,
---         operators = false,
---         folds = true,
---       },
---       strikethrough = true,
---       invert_selection = false,
---       invert_signs = false,
---       invert_tabline = false,
---       inverse = true, -- invert background for search, diffs, statuslines and errors
---       contrast = "", -- can be "hard", "soft" or empty string
---       palette_overrides = {},
---       overrides = {},
---       dim_inactive = false,
---       transparent_mode = false,
---     })
---     vim.cmd("colorscheme gruvbox")
---   end,
--- }
--- Using Lazy
-
--- return {
--- 	{
--- 		"vague2k/vague.nvim",
--- 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
--- 		priority = 1000, -- make sure to load this before all the other plugins
--- 		config = function()
--- 			require("vague").setup({
--- 				transparent = true, -- don't set background
--- 				bold = true,
--- 				italic = true,
--- 				style = {
--- 					boolean = "bold",
--- 					number = "bold",
--- 					float = "bold",
--- 					error = "bold",
--- 					comments = "bold",
--- 					conditionals = "bold",
--- 					functions = "bold",
--- 					headings = "bold",
--- 					operators = "bold",
--- 					strings = "bold",
--- 					variables = "bold",
--- 					keywords = "bold",
--- 					keyword_return = "bold",
--- 					keywords_loop = "bold",
--- 					keywords_label = "bold",
--- 					keywords_exception = "bold",
--- 					builtin_constants = "bold",
--- 					builtin_functions = "bold",
--- 					builtin_types = "bold",
--- 					builtin_variables = "bold",
--- 				},
--- 				plugins = {
--- 					cmp = {
--- 						match = "bold",
--- 						match_fuzzy = "bold",
--- 					},
--- 					dashboard = {
--- 						footer = "bold",
--- 					},
--- 					lsp = {
--- 						diagnostic_error = "bold",
--- 						diagnostic_hint = "bold",
--- 						diagnostic_info = "bold",
--- 						diagnostic_ok = "bold",
--- 						diagnostic_warn = "bold",
--- 					},
--- 					neotest = {
--- 						focused = "bold",
--- 						adapter_name = "bold",
--- 					},
--- 					telescope = {
--- 						match = "bold",
--- 					},
--- 				},
--- 				on_highlights = function(highlights, colors) end,
--- 				colors = {
--- 					bg = "#141415",
--- 					inactiveBg = "#1c1c24",
--- 					fg = "#cdcdcd",
--- 					floatBorder = "#878787",
--- 					line = "#252530",
--- 					comment = "#606079",
--- 					builtin = "#b4d4cf",
--- 					func = "#c48282",
--- 					string = "#e8b589",
--- 					number = "#e0a363",
--- 					property = "#c3c3d5",
--- 					constant = "#aeaed1",
--- 					parameter = "#bb9dbd",
--- 					visual = "#333738",
--- 					error = "#d8647e",
--- 					warning = "#f3be7c",
--- 					hint = "#7e98e8",
--- 					operator = "#90a0b5",
--- 					keyword = "#6e94b2",
--- 					type = "#9bb4bc",
--- 					search = "#405065",
--- 					plus = "#7fa563",
--- 					delta = "#f3be7c",
--- 				},
--- 			})
--- 			vim.cmd("colorscheme vague")
--- 		end,
--- 	},
--- 	{
--- 		"karb94/neoscroll.nvim",
--- 		opts = {},
--- 	},
--- }
-
--- return {
--- 	{
--- 		"brendon-felix/anysphere.nvim",
--- 		lazy = false, -- Load immediately at startup
--- 		priority = 1000, -- Ensure it loads before other plugins
--- 		config = function(_, opts)
--- 			require("anysphere").setup(opts) -- Apply user options (optional)
--- 			vim.cmd([[colorscheme anysphere]]) -- Set the colorscheme
--- 		end,
--- 		opts = {
--- 			-- You can optionally customize highlight settings if supported.
--- 			-- Example (from gruvbox-style config base):
--- 			contrast = "medium", -- "soft", "medium", or "hard"
--- 			transparent_mode = true,
--- 		},
--- 	},
--- }
---
+-- File: lua/themes/muted_dark.lua
 return {
-	"uZer/pywal16.nvim",
-	-- for local dev replace with:
-	-- dir = '~/your/path/pywal16.nvim',
+	"rebelot/kanagawa.nvim",
+	lazy = false, -- load immediately
 	config = function()
-		vim.cmd.colorscheme("pywal16")
+		local has_treesitter, _ = pcall(require, "nvim-treesitter")
+
+		require("kanagawa").setup({
+			background = {
+				dark = "dragon",
+				light = "lotus",
+			},
+			transparent = true, -- enable transparency
+		})
+
+		vim.cmd("colorscheme kanagawa")
+
+		-- Ensure transparency by clearing background highlights
+		vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+		vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+		vim.api.nvim_set_hl(0, "VertSplit", { bg = "none" })
+		vim.api.nvim_set_hl(0, "StatusLine", { bg = "none" })
+		vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "none" })
 	end,
 }
