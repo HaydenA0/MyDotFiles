@@ -1,8 +1,7 @@
-bindkey -v
-rm -rf ~/Downloads/
-rm -rf ~/Desktop/
-(cat ~/.cache/wal/sequences &)
-
+# bindkey -v
+# rm -rf ~/Downloads/
+# rm -rf ~/Desktop/
+# (cat ~/.cache/wal/sequences &)
 
 MARGIN=150
 NO_MARGIN=20
@@ -45,8 +44,8 @@ zinit light junegunn/fzf
 
 
 
-# alias ls='exa -l --group-directories-first --icons'
-alias ls='exa -l --no-user --no-time --group-directories-first --icons'
+# alias ls='exa -liF --no-user --no-time --group-directories-first'
+alias ls='exa -liF --group-directories-first '
 alias lsa="exa -lh --total-size"
 
 dup() {
@@ -88,12 +87,20 @@ ff() {
 
 cf() {
   local selected
-  # `fd` is much faster and the syntax is cleaner.
-  # It finds both files (-t f) and directories (-t d) by default.
-  # It ignores hidden files and .gitignore by default.
-  # We add --exclude to replicate your original logic.
    selected=$(fd -t d --exclude '__pycache__' --exclude '.git' . ~ | fzf)
-  # selected=$(find -type d | fzf)
+
+  # The rest of the logic remains the same.
+  if [[ -n "$selected" ]]; then
+    if [[ -d "$selected" ]]; then
+      z -- "$selected"
+    elif [[ -f "$selected" ]]; then
+      nvim -- "$selected"
+    fi
+  fi
+}
+hf() {
+  local selected
+   selected=$(fd  -t d --exclude '__pycache__' --exclude '.git' . . | fzf)
 
   # The rest of the logic remains the same.
   if [[ -n "$selected" ]]; then
@@ -106,6 +113,7 @@ cf() {
 }
 alias a="cf"
 alias q="ff"
+alias i="hf"
 
 autoload -U colors && colors
 
@@ -158,10 +166,10 @@ auto_env() {
 chpwd_functions+=("auto_env")
 
 alias -s /="cd"
-    
 
 
-  
+
+
 function zle-keymap-select {
   if [[ $KEYMAP == vicmd ]]; then
     RPS1="< NORMAL >"
@@ -184,7 +192,7 @@ zle -N zle-keymap-select
 
 # Function to copy file/folder paths to the Wayland clipboard
 #
- 
+
 # Function to copy file/folder paths to the Wayland clipboard (IMPROVED & MORE ROBUST)
 
 
@@ -256,24 +264,36 @@ tman() {
 
 export PATH=$PATH:/home/anasr/.spicetify
 alias clear_fastfetch="rm -rf $HOME/.cache/fastfetch/ ; cr"
-pdf_slect() {
-  pdf=$(find . -name "*.pdf" -print0 | fzf --read0) && setsid zathura "$pdf" >/dev/null 2>&1 &
-
+pdf() {
+    pdf=$(fd -e pdf . | fzf) && setsid zathura "$pdf" >/dev/null 2>&1 &
 }
+
 
 
 
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
-tmux new-session -A -s 1
-
+if [[ -z "$TMUX" ]]; then
+    tmux new-session -A -s 1
+fi
 clear
 
 cpw() {
     pwd | wl-copy
 }
 alias clipp="wl-copy"
+note() {
+    local timestamp=$(date +%Y-%m-%d)
+    local filename="$timestamp-${1// /-}.typ"
+    nvim "$HOME/personal_vault/00-inbox/$filename"
+}
 
 
+pro() {
+  cd "$(fd . ~/dev/Projects  -t d --max-depth 1 --exclude '.*' --exclude '__*' | fzf)"
+}
+bindkey -r '\ec'   # Alt+C
+bindkey -r '\C-t'  # Ctrl+T
 
+alias audioctl="pavucontrol"
