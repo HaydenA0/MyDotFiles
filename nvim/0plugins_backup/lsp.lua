@@ -27,6 +27,15 @@ return {
 			vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Show buffer diagnostics list" })
 			vim.keymap.set("n", "grn", vim.lsp.buf.rename, { desc = "LSP Rename Symbol" })
 
+			vim.lsp.config("clangd", {
+				cmd = { "clangd", "--inlay-hints=true" },
+				on_attach = function(client, bufnr)
+					if client.server_capabilities.inlayHintProvider then
+						vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+					end
+				end,
+			})
+
 			vim.lsp.enable("clangd")
 		end,
 	},
