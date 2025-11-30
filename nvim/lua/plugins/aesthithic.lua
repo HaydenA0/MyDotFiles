@@ -23,6 +23,7 @@ return {
 					light = "lotus",
 				},
 				transparent = true, -- enable transparency
+				keywordStyle = { bold = true, italic = false },
 			})
 
 			vim.cmd("colorscheme kanagawa")
