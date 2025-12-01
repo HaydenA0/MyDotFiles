@@ -1,8 +1,6 @@
-vim.g.mapleader = " "
-
+require("core.options")
+require("core.keybindings")
+require("core.custom_commands")
 require("config.lazy")
 
-require("core.options")
-require("core.keymaps")
-require("core.autocmds")
-require("core.commands")
+vim.cmd.colorscheme("melange")

@@ -57,45 +57,27 @@
 -- }
 --
 return {
-	-- "nvim-telescope/telescope.nvim",
-	-- tag = "v0.2.0",
-	-- dependencies = { "nvim-lua/plenary.nvim" },
-	--
-	-- config = function()
-	-- 	require("telescope").setup({
-	-- 		pickers = {
-	-- 			find_files = {
-	-- 				theme = "ivy",
-	-- 				winblend = 0,
-	-- 				previewer = false,
-	-- 			},
-	-- 			oldfiles = {
-	-- 				theme = "ivy",
-	-- 				winblend = 0,
-	-- 				previewer = false,
-	-- 			},
-	-- 			current_buffer_fuzzy_find = {
-	-- 				theme = "ivy",
-	-- 				winblend = 0,
-	-- 				previewer = false,
-	-- 			},
-	-- 		},
-	-- 		extensions = {
-	-- 			fzf = {},
-	-- 		},
-	-- 	})
-	-- 	require("telescope").load_extension("fzf")
-	-- 	local builtin = require("telescope.builtin")
-	-- 	local map = vim.keymap.set
-	--
-	-- 	map("n", "<C-p>", builtin.find_files, { desc = "Telescope find files" })
-	-- 	map("n", "<leader>r", builtin.oldfiles, { desc = "Recent files" })
-	-- 	map("n", "<leader>f", builtin.current_buffer_fuzzy_find, { desc = "fzf find stuff" })
-	-- 	map("n", "<leader>g", builtin.live_grep, { desc = "grep in a project" })
-	-- 	map("n", "<leader>fc", function()
-	-- 		builtin.find_files({
-	-- 			cwd = vim.fn.stdpath("config"),
-	-- 		})
-	-- 	end)
-	-- end,
+	"nvim-telescope/telescope.nvim",
+	tag = "v0.2.0",
+	dependencies = { "nvim-lua/plenary.nvim" },
+
+	config = function()
+		require("telescope").setup({
+			pickers = {
+				find_files = {
+					theme = "ivy",
+					winblend = 0,
+					previewer = false,
+				},
+				oldfiles = {
+					theme = "ivy",
+					winblend = 0,
+					previewer = false,
+				},
+			},
+		})
+		local builtin = require("telescope.builtin")
+		vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Telescope find files" })
+		vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Recent files" })
+	end,
 }

@@ -2,10 +2,16 @@ return {
 	"stevearc/oil.nvim",
 	opts = {
 		columns = { "permissions", "size", "ctime" },
-		keymaps = {
-			["<M-h>"] = "actions.parent",
-			["<M-l>"] = "actions.select",
-		},
+                keymaps = {
+                  ["<M-h>"] = "actions.parent",
+                  ["<M-l>"] = "actions.select",
+                  ["<C-s>"] = {},
+                  ["<C-h>"] = {},
+                  ["<C-t>"] = {},
+                  ["<C-p>"] = {},
+                  ["<C-c>"] = {},
+                  ["<C-l>"] = {},
+                },
 		skip_confirm_for_simple_edits = true,
 		default_file_explorer = true,
 		view_options = {
@@ -15,16 +21,7 @@ return {
 			end,
 		},
 	},
-	dependencies = {},
-	lazy = false,
-	config = function(_, opts)
-		local oil = require("oil")
-		oil.setup(opts)
-
-		-- Keybinding to toggle hidden files
-		vim.keymap.set("n", "zh", function()
-			oil.toggle_hidden()
-		end, { desc = "Toggle hidden files in Oil" })
-		vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open Oil file explorer" })
-	end,
+	-- config = function()
+	-- 	vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open Oil file explorer" })
+	-- end,
 }
