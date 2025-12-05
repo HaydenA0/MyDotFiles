@@ -1,0 +1,47 @@
+{
+    "layer": "top",
+    "position": "bottom",
+    "modules-left": ["hyprland/workspaces", "custom/arch_label"],
+    "modules-center": [ "custom/spotify"],
+    "modules-right": ["network","battery", "clock"],
+
+
+
+        "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "active": "",
+         },	
+	 },
+
+    "custom/arch_label": {
+        "exec": "echo '' 'Arch Linux'",
+        "interval": 600
+    },
+
+    "custom/spotify": {
+        "exec": "playerctl -p spotify metadata --format '{{artist}} 󰻂 {{title}}' 2>/dev/null || echo 'No Music is playing'",
+        "interval": 01
+    },
+
+
+        "battery": {
+        "interval": 10,
+        "full-at": 100,
+        "format": "{icon} {capacity}%",
+        "format-charging": "",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂂", "󰁹"],
+    },
+
+    "clock": {
+        "format": "{:%H:%M}"
+    },
+        "network": {
+        "interval": 10,
+        "format": "  {essid} ",
+        "format-disconnected": "",
+    },
+
+    "modules-spacing": 20
+}
+

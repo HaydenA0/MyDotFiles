@@ -1,0 +1,42 @@
+@import url("/home/anasr/.cache/wal/colors-waybar.css");
+
+window#waybar {
+    color: @foreground;
+    font-family: "JetBrains Mono Nerd Font";
+    font-size: 16px;
+    font-weight: 900; /* bold font */
+    background: transparent;
+}
+
+label.module {
+    padding: 0 19px;
+}
+
+#custom-workspaces {
+    color: @color1;
+}
+
+#custom-arch_label {
+    color: @color3;
+}
+
+#custom-spotify {
+    color: @color8;
+}
+
+#network {
+    color: @color2;
+}
+
+#battery {
+    color: @color11;
+}
+
+#battery.charging {
+    color: @color6;
+}
+
+#clock {
+    color: @foreground;
+}
+

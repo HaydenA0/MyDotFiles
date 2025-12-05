@@ -5,21 +5,18 @@
 !.gitignore
 
 
-!/kitty/
-!/fastfetch/
+!/alacritty/
 !/hypr/
 !/rofi/
-!/spicetify/
 !/nvim/
+!/waybar/
 !/nostress.jpg
 !/README.md
 
 
-!/kitty/**
-!/fastfetch/**
+!/alacritty/**
 !/hypr/**
 !/rofi/**
-!/spicetify/**
 !/nvim/**
 !/waybar/**
 

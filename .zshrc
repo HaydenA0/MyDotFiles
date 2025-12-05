@@ -205,7 +205,7 @@ setopt append_history
 setopt share_history
 
 
-alias zshc="nvim .zshrc"
+alias zshc="nvim ~/.zshrc"
 alias s="sudo"
 alias vim="nvim"
 alias vi="nvim"
