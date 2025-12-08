@@ -1,10 +1,6 @@
-
-return{
-  {
-    "savq/melange-nvim" ,
-  },
-  {
-    "xiyaowong/transparent.nvim",
-  }
-
+return {
+	{ "savq/melange-nvim" },
+	{
+		"xiyaowong/transparent.nvim",
+	},
 }

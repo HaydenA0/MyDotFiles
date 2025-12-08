@@ -23,6 +23,7 @@ return {
 					"markdown_inline",
 					"c",
 					"cpp",
+					"rust",
 				},
 
 				sync_install = false,
