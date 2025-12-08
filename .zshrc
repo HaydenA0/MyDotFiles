@@ -2,17 +2,8 @@
 # rm -rf ~/Downloads/
 # rm -rf ~/Desktop/
 # (cat ~/.cache/wal/sequences &)
+alias fzf="sk"
 
-MARGIN=150
-NO_MARGIN=20
-# if [[ -z "$NVIM" ]]; then
-#   kitty @ set-spacing margin=$MARGIN 2>/dev/null
-# fi
-# nvim() {
-#   kitty @ set-spacing margin=$NO_MARGIN
-#   command nvim "$@"
-#   kitty @ set-spacing margin=$MARGIN
-# }
 
 
 setopt AUTO_CD
@@ -45,30 +36,9 @@ zinit light junegunn/fzf
 
 
 # alias ls='exa -liF --no-user --no-time --group-directories-first'
-alias ls='exa -liF --group-directories-first '
+alias ls='exa -liF --icons --group-directories-first '
 alias lsa="exa -lh --total-size"
 
-dup() {
-	kitten @ launch --type=tab --keep-focus zsh -lc "\cd \"$(zoxide query $(pwd))\"; exec zsh"
-}
-
-bright() {
-  if [ $# -eq 0 ]; then
-    echo "Usage: bright <percent>"
-    return 1
-  fi
-  brightnessctl set "$1"% 
-}
-
-export PATH="$HOME/ghostty:$PATH"
-
-vol() {
-  if [ $# -eq 0 ]; then
-    echo "Usage: vol <percent>"
-    return 1
-  fi
-  pamixer --set-volume "$1"
-}
 
 
 ff() {
@@ -163,22 +133,22 @@ auto_env() {
 }
 
 # Register function to run on directory change
-chpwd_functions+=("auto_env")
+# chpwd_functions+=("auto_env")
 
 alias -s /="cd"
 
 
 
 
-function zle-keymap-select {
-  if [[ $KEYMAP == vicmd ]]; then
-    RPS1="< NORMAL >"
-  else
-    RPS1="> INSERT >"
-  fi
-  zle reset-prompt
-}
-zle -N zle-keymap-select
+# function zle-keymap-select {
+#   if [[ $KEYMAP == vicmd ]]; then
+#     RPS1="< NORMAL >"
+#   else
+#     RPS1="> INSERT >"
+#   fi
+#   zle reset-prompt
+# }
+# zle -N zle-keymap-select
 
 
 
@@ -297,3 +267,6 @@ bindkey -r '\ec'   # Alt+C
 bindkey -r '\C-t'  # Ctrl+T
 
 alias audioctl="pavucontrol"
+
+
+
