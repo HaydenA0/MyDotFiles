@@ -1,5 +1,5 @@
 [font]
-normal = { family = "Iosevka Nerd Font Mono", style = "Bold" }
+normal = { family = "Iosevka Nerd Font Mono", style = "Regular" }
 bold = { family = "Iosevka Nerd Font Mono", style = "ExtraBold" }
 italic = { family = "Iosevka Nerd Font Mono", style = "Bold Italic" }
 bold_italic = { family = "Iosevka Nerd Font Mono", style = "ExtraBold Italic" }
@@ -19,9 +19,9 @@ bold_italic = { family = "Iosevka Nerd Font Mono", style = "ExtraBold Italic" }
 #
 #
 size = 16.0
-#
-#
-#
+
+
+
 [window]
 padding = {x = 0, y =0}
 
@@ -30,31 +30,47 @@ bindings = [
     { key="ArrowUp", mods="Control|Shift", action="ScrollLineUp" },
     { key="ArrowDown", mods="Control|Shift", action="ScrollLineDown" }
 ]
-#
-#
+
+
+  # Vague for Alacritty
+# Upstream: https://github.com/vague-theme/vague-alacritty/blob/main/vague.toml
+
 [colors.primary]
-foreground = "#ECE1D7"
-# background = "#292222"
-background = "#000000"
+background = '#141415'
+foreground = '#cdcdcd'
+
 [colors.normal]
-black      = "#34302C"
-red        = "#BD8183"
-green      = "#78997A"
-yellow     = "#E49B5D"
-blue       = "#7F91B2"
-magenta    = "#B380B0"
-cyan       = "#7B9695"
-white      = "#C1A78E"
+black = '#252530'
+red = '#d8647e'
+green = '#7fa563'
+yellow = '#f3be7c'
+blue = '#6e94b2'
+magenta = '#bb9dbd'
+cyan = '#aeaed1'
+white = '#cdcdcd'
+
 [colors.bright]
-black      = "#867462"
-red        = "#D47766"
-green      = "#85B695"
-yellow     = "#EBC06D"
-blue       = "#A3A9CE"
-magenta    = "#CF9BC2"
-cyan       = "#89B3B6"
-white      = "#ECE1D7"
+black = '#606079'
+red = '#e08398'
+green = '#99b782'
+yellow = '#f5cb96'
+blue = '#8ba9c1'
+magenta = '#c9b1ca'
+cyan = '#bebeda'
+white = '#d7d7d7'
 
+[colors.hints.start]
+foreground = "CellBackground"
+background = "CellForeground"
 
+[colors.hints.end]
+foreground = "CellBackground"
+background = "CellForeground"
 
+[colors.search.matches]
+foreground = "CellBackground"
+background = "CellForeground"
 
+[colors.search.focused_match]
+foreground = "CellBackground"
+background = '#f3be7c'

@@ -9,6 +9,8 @@ alias fzf="sk"
 setopt AUTO_CD
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export EDITOR="nvim"
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -22,11 +24,40 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 
 zinit ice lucid wait'0' turbo
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-zinit ice depth=1 ; zinit light romkatv/powerlevel10k
 
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=blue'
-zinit light zsh-users/zsh-syntax-highlighting
+
+# edit in nvim
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^E' edit-command-line
+
+
+
+
+# My condfig this time
+#TODO : Check this math
+autoload -Uz promptinit
+promptinit
+
+set_prompt() {
+    local cols=$(tput cols)           # get terminal width
+    local dir="%~"                    # directory string
+    local len=${#${(%)dir}}           # length of the directory string
+    local padding=$(( (cols - len) / 2 ))  # calculate spaces for centering
+    PS1="%F{blue}$(printf '%*s' $padding '')${dir}%f
+%F{red}zsh ::%f "
+}
+
+precmd_functions+=(set_prompt)
+
+
+
+
+# Sorry
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# zinit ice depth=1 ; zinit light romkatv/powerlevel10k
+
+# zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light marlonrichert/zsh-autocomplete
 zinit light junegunn/fzf
@@ -36,7 +67,7 @@ zinit light junegunn/fzf
 
 
 # alias ls='exa -liF --no-user --no-time --group-directories-first'
-alias ls='exa -liF --icons --group-directories-first '
+alias ls='exa -F --icons --color=never --group-directories-first'
 alias lsa="exa -lh --total-size"
 
 
@@ -270,3 +301,4 @@ alias audioctl="pavucontrol"
 
 
 
+alias calc="numi-cli"
