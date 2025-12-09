@@ -115,11 +115,12 @@ hf() {
 alias a="cf"
 alias q="ff"
 alias i="hf"
+alias zi="\zi"
 
 autoload -U colors && colors
 
 alias reload="source ~/.zshrc"
-source <(fzf --zsh)
+# source <(fzf --zsh)
 
 
 
@@ -278,7 +279,6 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 if [[ -z "$TMUX" ]]; then
     tmux new-session -A -s 1
 fi
-clear
 
 cpw() {
     pwd | wl-copy
@@ -302,3 +302,16 @@ alias audioctl="pavucontrol"
 
 
 alias calc="numi-cli"
+
+
+# Create a custom clear-screen function
+function clear_screen_x() {
+  clear -x
+  zle reset-prompt
+}
+zle -N clear_screen_x
+bindkey '^L' clear_screen_x
+
+
+
+

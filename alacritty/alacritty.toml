@@ -28,7 +28,9 @@ padding = {x = 0, y =0}
 [keyboard]
 bindings = [
     { key="ArrowUp", mods="Control|Shift", action="ScrollLineUp" },
-    { key="ArrowDown", mods="Control|Shift", action="ScrollLineDown" }
+    { key="ArrowDown", mods="Control|Shift", action="ScrollLineDown" },
+    # { key= "L", mods= "Control", action= "ClearHistory" },
+
 ]
 
 
