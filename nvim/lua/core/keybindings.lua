@@ -21,3 +21,4 @@ keymap("n", "<C-q><leader>", "<cmd>copen<CR>", { desc = "Open the quick fix list
 keymap("n", "<C-q>j", "<cmd>cnext<CR>", { desc = "Open the quick fix list" })
 keymap("n", "<C-q>k", "<cmd>cprevious<CR>", { desc = "Open the quick fix list" })
 keymap("n", "<leader>k", "<cmd>cd %:p:h <CR>", { desc = "Update the working directory" })
+keymap("i", "<C-p>", "<Esc>pi", { noremap = true, silent = true })
