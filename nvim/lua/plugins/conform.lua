@@ -7,6 +7,7 @@ return {
 			c = { "clang-format" },
 			cpp = { "clang-format" },
 			rust = { "rustfmt" },
+			go = { "gofmt" },
 		},
 	},
 	config = function(_, opts)
