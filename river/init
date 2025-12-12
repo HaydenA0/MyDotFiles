@@ -1,0 +1,40 @@
+#!/bin/sh
+
+SCREEN_NAME="Virtual-1"
+mod="Mod4"
+
+riverctl map normal $mod Return spawn alacritty
+riverctl map normal $mod+Shift Q close
+riverctl map normal $mod+Shift E exit
+
+riverctl map normal $mod J focus-view next
+riverctl map normal $mod K focus-view previous
+
+riverctl map normal $mod+Shift J swap next
+riverctl map normal $mod+Shift K swap previous
+
+
+riverctl default-layout rivertile
+rivertile -view-padding 6 -outer-padding 6 -main-ratio 0.5 &
+riverctl map normal $mod H send-layout-cmd rivertile "main-ratio -0.05"
+riverctl map normal $mod L send-layout-cmd rivertile "main-ratio +0.05"
+
+riverctl map normal $mod Space toggle-fullscreen
+
+for i in $(seq 1 9)
+do
+    tags=$((1 << ($i - 1)))
+    riverctl map normal $mod $i set-focused-tags $tags
+    riverctl map normal $mod+Shift $i set-view-tags $tags
+done
+
+
+wlr-randr --output $SCREEN_NAME --mode 1920x1080@60Hz &
+
+riverctl background-color 0x000000
+
+
+
+riverctl map normal $mod D spawn 'rofi -show drun'
+
+riverctl map normal $mod+Shift R spawn ~/.config/river/init

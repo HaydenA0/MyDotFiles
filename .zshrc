@@ -67,7 +67,7 @@ zinit light junegunn/fzf
 
 
 # alias ls='exa -liF --no-user --no-time --group-directories-first'
-alias ls='exa -F --icons --color=never --group-directories-first'
+alias ls='exa -lF --icons --color=never --group-directories-first'
 alias lsa="exa -lh --total-size"
 
 
@@ -301,16 +301,122 @@ alias audioctl="pavucontrol"
 
 
 
-alias calc="numi-cli"
+python_calc() {
+  if [[ $1 != "-m" ]]; then
+    input=$*
+    echo "Input : $input"
+    python3 -c "print($input)"
+  else 
+    shift
+    input=$*
+    echo "Math : $input"
+    python3 -c "import math
+print($input)"
+  fi
+}
+#my note : this is a very very simple personal
+#one liner script for simple math, it hurts me that 
+#the shell is a REPL but i cant just type 32345+120921
+#without putting it in $((...)) this will help me for 
+#now, it gets the job done for any one liner
+#and I trust myself with it
+
+alias calc="python_calc" 
 
 
-# Create a custom clear-screen function
+
 function clear_screen_x() {
   clear -x
   zle reset-prompt
 }
 zle -N clear_screen_x
-bindkey '^L' clear_screen_x
+bindkey '^[l' clear_screen_x
+
+
+
+run() {
+    __usage() { }
+    if [ -z "$1" ]; then
+        echo "Error: No language specified."
+        __usage
+        return 1
+    fi
+
+    case "$1" in
+        r|R)
+            cargo run
+            ;;
+        c|C)
+            make run
+            ;;
+        p|P)
+            if [ -z "$2" ]; then
+                echo "Error: No Python script specified."
+                usage
+                return 1
+            fi
+            if [ ! -f "$2" ]; then
+                echo "Error: File '$2' does not exist."
+                return 1
+            fi
+            python "$2"
+            ;;
+        *)
+            echo "Error: Unknown choice '$1'."
+            usage
+            return 1
+            ;;
+    esac
+}
+
+run_auto() {
+    if [ -f "makefile" ]; then
+        echo "Detected makefile. Running C/make project..."
+        run c
+        return $?
+    elif [ -f "Cargo.toml" ]; then
+        echo "Detected Cargo.toml. Running Rust project..."
+        run r
+        return $?
+    elif [ -d ".venv" ]; then
+        if [ -f "src/main.py" ]; then
+            echo "Detected Python virtual environment and main.py. Running Python script..."
+            auto_env;
+            python src/main.py
+            return $?
+        else
+            echo "Error: Python virtual environment found but 'main.py' is missing."
+            return 1
+        fi
+    else
+        echo "Error: No recognized project files found (makefile, Cargo.toml, or .venv)."
+        return 1
+    fi
+}
+
+
+python_mkproj () {
+    local dir="$1"
+
+    mkdir -p "$dir" || return 1
+    cd "$dir" || return 1
+
+    mkdir -p src
+
+    mkvenv
+    auto_env
+
+    cd src || return 1
+
+    echo 'print("hello world")' > main.py
+
+    cd ..
+}
+
+export AIRFLOW_HOME=~/dev/airflow
+eval "$(pyenv init -)"
+
+alias e="exit"
 
 
 
