@@ -5,25 +5,18 @@
 !.gitignore
 
 
-!/alacritty/
-!/hypr/
 !/rofi/
 !/nvim/
-!/waybar/
 !/river/
+!/foot/
 !/nostress.jpg
 !/README.md
 
 
-!/alacritty/**
-!/hypr/**
 !/rofi/**
 !/nvim/**
-!/waybar/**
+!/foot/**
 !/river/**
 
-!.p10k.zsh
-!.zsh_history
-!.zshrc
-!install.sh
 !.tmux.conf
+!.bashrc

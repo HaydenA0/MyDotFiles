@@ -1,9 +1,11 @@
 #!/bin/sh
 
-SCREEN_NAME="Virtual-1"
+SCREEN_NAME="eDP-1"
 mod="Mod4"
+riverctl rule-add -app-id spotify tags 256
 
-riverctl map normal $mod Return spawn alacritty
+
+riverctl map normal $mod Return spawn foot
 riverctl map normal $mod+Shift Q close
 riverctl map normal $mod+Shift E exit
 
@@ -21,6 +23,18 @@ riverctl map normal $mod L send-layout-cmd rivertile "main-ratio +0.05"
 
 riverctl map normal $mod Space toggle-fullscreen
 
+riverctl map normal $mod D spawn 'rofi -show drun'
+riverctl map normal $mod+Shift R spawn ~/.config/river/init
+riverctl map normal $mod s spawn spotify
+riverctl map normal $mod q spawn 'playerctl -p spotify play-pause'
+riverctl map normal $mod+Shift Right spawn 'playerctl -p spotify next'
+riverctl map normal $mod+Shift Left spawn 'playerctl -p spotify previous'
+riverctl map normal $mod+Shift S spawn '~/scripts/screenshot.sh'
+riverctl map normal $mod+Shift P spawn '~/scripts/dumb-screenshot.sh'
+riverctl map-pointer normal $mod BTN_LEFT move-view
+riverctl map-pointer normal $mod BTN_RIGHT resize-view
+
+
 for i in $(seq 1 9)
 do
     tags=$((1 << ($i - 1)))
@@ -29,12 +43,27 @@ do
 done
 
 
-wlr-randr --output $SCREEN_NAME --mode 1920x1080@60Hz &
+wlr-randr --output $SCREEN_NAME --mode 1920x1080@144Hz &
+
+riverctl keyboard-layout -options "caps:escape" us
+riverctl rule-add -title "Picture-in-Picture" float
+
 
 riverctl background-color 0x000000
+riverctl border-width 1
 
 
 
-riverctl map normal $mod D spawn 'rofi -show drun'
+riverctl input pointer-1133-16500-Logitech_G305 pointer-accel -0.2
+for mode in normal locked; do
+    riverctl map -repeat $mode None XF86AudioRaiseVolume  spawn 'wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+'
+    riverctl map -repeat $mode None XF86AudioLowerVolume  spawn 'wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-'
+    riverctl map $mode None XF86AudioMute                 spawn 'wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle'
+    riverctl map $mode None XF86AudioMicMute              spawn 'wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle'
+    riverctl map -repeat $mode None XF86MonBrightnessUp   spawn 'brightnessctl -e4 -n2 set 5%+'
+    riverctl map -repeat $mode None XF86MonBrightnessDown spawn 'brightnessctl -e4 -n2 set 5%-'
+done
 
-riverctl map normal $mod+Shift R spawn ~/.config/river/init
+# if ! pgrep -f "xremap" > /dev/null; then
+#     riverctl spawn "$HOME/.cargo/bin/xremap $HOME/.config/xremap/config.yml"
+# fi
