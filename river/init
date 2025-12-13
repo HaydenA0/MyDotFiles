@@ -1,11 +1,12 @@
 #!/bin/sh
 
 SCREEN_NAME="eDP-1"
+TERMINAL="foot"
 mod="Mod4"
 riverctl rule-add -app-id spotify tags 256
 
 
-riverctl map normal $mod Return spawn foot
+riverctl map normal $mod Return spawn $TERMINAL
 riverctl map normal $mod+Shift Q close
 riverctl map normal $mod+Shift E exit
 
