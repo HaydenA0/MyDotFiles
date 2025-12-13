@@ -36,6 +36,7 @@ return {
 	},
 	{
 		"L3MON4D3/LuaSnip",
+    lazy=true,
 		keys = function()
 			-- Disable default tab keybinding in LuaSnip
 			return {}

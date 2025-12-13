@@ -1,6 +1,5 @@
 #!/bin/sh
 
-SCREEN_NAME="eDP-1"
 TERMINAL="foot"
 mod="Mod4"
 riverctl rule-add -app-id spotify tags 256
@@ -44,7 +43,6 @@ do
 done
 
 
-wlr-randr --output $SCREEN_NAME --mode 1920x1080@144Hz &
 
 riverctl keyboard-layout -options "caps:escape" us
 riverctl rule-add -title "Picture-in-Picture" float
