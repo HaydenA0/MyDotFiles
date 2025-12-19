@@ -1,17 +1,18 @@
 return {
 	"stevearc/oil.nvim",
 	opts = {
-		columns = { "permissions", "size", "ctime" , "icon"},
-                keymaps = {
-                  ["<M-h>"] = "actions.parent",
-                  ["<M-l>"] = "actions.select",
-                  ["<C-s>"] = {},
-                  ["<C-h>"] = {},
-                  ["<C-t>"] = {},
-                  ["<C-p>"] = {},
-                  ["<C-c>"] = {},
-                  ["<C-l>"] = {},
-                },
+		columns = { "permissions", "size", "ctime", "icon" },
+		keymaps = {
+			["<M-h>"] = "actions.parent",
+			["<M-l>"] = "actions.select",
+			["<C-s>"] = {},
+			["<C-h>"] = {},
+			["<C-t>"] = {},
+			["<C-p>"] = {},
+			["<C-c>"] = {},
+			-- ["<C-l>"] = {},
+			["<C-l>"] = "actions.refresh",
+		},
 		skip_confirm_for_simple_edits = true,
 		default_file_explorer = true,
 		view_options = {
@@ -23,5 +24,5 @@ return {
 	},
 	-- config = function()
 	-- end,
-        vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open Oil file explorer" })
+	vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open Oil file explorer" }),
 }

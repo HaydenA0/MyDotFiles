@@ -21,7 +21,7 @@ return {
 			fzf_opts = {},
 			fzf_colors = {},
 			hls = {},
-			keymap = {},
+			-- keymap = { },
 		})
 		local keymap = vim.keymap.set
 		keymap("n", "<C-p>", "<cmd>FzfLua files<CR>")

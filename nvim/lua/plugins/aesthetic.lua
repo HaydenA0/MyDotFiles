@@ -9,20 +9,20 @@ return {
 	-- 		vim.cmd.colorscheme("zenbones")
 	-- 	end,
 	-- },
-	-- {
-	-- 	"aktersnurra/no-clown-fiesta.nvim",
-	-- 	opts = {
-	-- 		styles = {
-	-- 			keywords = { bold = true },
-	-- 			functions = {},
-	-- 			variables = {},
-	-- 		},
-	-- 	},
-	--
-	-- 	config = function()
-	-- 		vim.cmd([[colorscheme no-clown-fiesta]])
-	-- 	end,
-	-- },
+	{
+		"aktersnurra/no-clown-fiesta.nvim",
+		opts = {
+			styles = {
+				keywords = { bold = true },
+				functions = { bold = true },
+				variables = {},
+			},
+		},
+
+		config = function()
+			vim.cmd([[colorscheme no-clown-fiesta]])
+		end,
+	},
 	-- {
 	-- 	"vague-theme/vague.nvim",
 	-- 	lazy = false, -- make sure we load this during startup if it is your main colorscheme
