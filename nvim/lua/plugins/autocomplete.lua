@@ -2,7 +2,7 @@ return {
 	"saghen/blink.cmp",
 	dependencies = { "rafamadriz/friendly-snippets" },
 	version = "1.*",
-        event = "InsertEnter",
+	event = "InsertEnter",
 
 	---@module 'blink.cmp'
 	---@type blink.cmp.Config
@@ -10,7 +10,6 @@ return {
 		snippets = { preset = "luasnip" },
 		keymap = {
 			preset = "super-tab",
-
 			["<C-j>"] = { "select_next", "fallback" },
 			["<C-k>"] = { "select_prev", "fallback" },
 		},
@@ -19,7 +18,12 @@ return {
 			nerd_font_variant = "mono",
 		},
 
-		completion = { documentation = { auto_show = false }, menu = { border = "rounded" } },
+		completion = {
+			ghost_text = { enabled = true },
+
+			documentation = { auto_show = false },
+			menu = { border = "rounded" },
+		},
 
 		sources = {
 			default = { "snippets", "lsp", "path", "buffer" },
