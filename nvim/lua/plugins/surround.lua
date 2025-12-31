@@ -4,8 +4,8 @@ return {
 	config = function()
 		require("nvim-surround").setup({})
 
-		vim.keymap.set("v", "w", "<Plug>(nvim-surround-visual)", {
-			desc = "Surround selection with 'w'",
+		vim.keymap.set("v", "s", "<Plug>(nvim-surround-visual)", {
+			desc = "Surround selection with 's'",
 		})
 	end,
 }

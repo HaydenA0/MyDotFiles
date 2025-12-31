@@ -18,11 +18,13 @@ keymap("n", "<C-q><leader>", "<cmd>copen<CR>", { desc = "Open the quick fix list
 keymap("n", "<C-q>j", "<cmd>cnext<CR>", { desc = "Open the quick fix list" })
 keymap("n", "<C-q>k", "<cmd>cprevious<CR>", { desc = "Open the quick fix list" })
 keymap("n", "<leader>k", "<cmd>cd %:p:h <CR>", { desc = "Update the working directory" })
+keymap("n", "<leader>=", "<C-w>=", { noremap = true, silent = true })
+
 keymap("i", "<C-p>", "<Esc>pi", { noremap = true, silent = true })
 
+keymap({ "n", "v" }, "<M-p>", "%", { desc = "Enter command mode" })
 keymap({ "n", "v" }, ";", ":", { desc = "Enter command mode" })
 keymap({ "n", "v" }, ":", ";", { desc = "Repeat last f/t motion" })
-keymap("n", "<leader>o", ":Z ", { noremap = true })
 -- keymap("i", "<C-d>", "<C-o>x", { noremap = true })
 keymap("i", "<C-e>", "<C-o>$", { noremap = true })
 keymap("i", "<C-a>", "<C-o>0", { noremap = true })
