@@ -1,7 +1,12 @@
 #!/bin/sh
 export XDG_CURRENT_DESKTOP=river
 export XDG_SESSION_TYPE=wayland
+export XDG_SESSION_DESKTOP=river
+WALLPAPER_PATH="$HOME/downloads/images/wallpaper"
 
+swaybg -i "$WALLPAPER_PATH/cat.png" -m fill &
+
+riverctl background-color 0x000000
 dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
@@ -28,7 +33,8 @@ riverctl map normal $mod L send-layout-cmd rivertile "main-ratio +0.05"
 
 riverctl map normal $mod Space toggle-fullscreen
 
-riverctl map normal $mod D spawn 'rofi -show drun'
+riverctl spawn 'vicinae server'
+riverctl map normal $mod D spawn 'vicinae toggle'
 riverctl map normal $mod+Shift R spawn ~/.config/river/init
 riverctl map normal $mod s spawn spotify
 riverctl map normal $mod q spawn 'playerctl -p spotify play-pause'
@@ -53,7 +59,6 @@ riverctl keyboard-layout -options "caps:escape" us
 riverctl rule-add -title "Picture-in-Picture" float
 
 
-riverctl background-color 0x000000
 riverctl border-width 1
 
 
@@ -76,3 +81,8 @@ if ! pgrep -x dunst >/dev/null; then
     riverctl spawn "dunst &"
 fi
 
+
+
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_DESKTOP
+systemctl --user stop xdg-desktop-portal xdg-desktop-portal-wlr
+systemctl --user start xdg-desktop-portal xdg-desktop-portal-wlr
