@@ -10,19 +10,16 @@ return {
 			["<C-t>"] = {},
 			["<C-p>"] = {},
 			["<C-c>"] = {},
-			-- ["<C-l>"] = {},
 			["<C-l>"] = "actions.refresh",
 		},
 		skip_confirm_for_simple_edits = true,
 		default_file_explorer = true,
 		view_options = {
-			show_hidden = true, -- initially hidden
+			show_hidden = true,
 			is_hidden_file = function(name, bufnr)
 				return name:match("^%.") ~= nil
 			end,
 		},
 	},
-	-- config = function()
-	-- end,
 	vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open Oil file explorer" }),
 }

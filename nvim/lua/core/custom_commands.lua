@@ -20,3 +20,23 @@ vim.api.nvim_create_user_command("ClearComments", clear_comments, {
 	desc = "Remove all comments from the current buffer",
 })
 
+local function zoxide_to_oil()
+	require("fzf-lua").fzf_exec("zoxide query -l", {
+		actions = {
+			["default"] = function(selected)
+				local path = selected[1]
+				if path then
+					vim.fn.chdir(path)
+					require("oil").open(path)
+				end
+			end,
+		},
+		winopts = {
+			title = " Teleport to Directory (Zoxide) ",
+			height = 0.40,
+			width = 0.60,
+		},
+	})
+end
+
+vim.keymap.set("n", "<leader>j", zoxide_to_oil, { desc = "Zoxide Teleport to Oil" })
