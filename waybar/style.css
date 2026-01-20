@@ -1,0 +1,109 @@
+@import "/home/anasr/.cache/wal/colors-waybar.css";
+
+* {
+    border: none;
+    font-size: 16px;
+    font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF" ;
+    font-weight: bold;
+    min-height: 22px;
+    /* Set default text color to the theme foreground */
+    color: @foreground;
+}
+
+window#waybar {
+  background: transparent;
+  margin: 3px;
+ }
+
+#custom-logo {
+  padding: 0 10px;
+  color: @color4; /* Optional: Make logo an accent color */
+}
+
+.modules-right {
+  padding-left: 5px;
+  border-radius: 15px 0 0 15px;
+  margin-top: 2px;
+  background: @background; /* Replaced #000000 */
+}
+
+.modules-center {
+  margin-top: 3px;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+#custom-spotify {
+  background: @background; 
+  color: @foreground;     
+  padding: 5px 15px;     
+  border-radius: 15px;
+  margin-left: 10px;      
+}
+
+/* 3. Style the image (outside the blob) */
+#image-album-art {
+  padding: 0px;
+  margin-top: 0px;
+  border-radius: 0px;
+}
+
+.modules-left {
+  border-radius: 0 15px 15px 0;
+  margin-top: 2px;
+  background: @background; /* Replaced #000000 */
+}
+
+#battery,
+#custom-clipboard,
+#custom-colorpicker,
+#custom-powerDraw,
+#bluetooth,
+#pulseaudio,
+#network,
+#disk,
+#memory,
+#backlight,
+#cpu,
+#temperature,
+#custom-weather,
+#idle_inhibitor,
+#jack,
+#tray,
+#window,
+#workspaces,
+#clock {
+  padding: 0 5px;
+}
+
+#clock{
+  color: @color4;
+}
+
+#battery.charging {
+    color: @background;       /* Replaced #ffffff */
+    background-color: @color2; /* Replaced #26A65B (Green) with theme accent */
+}
+
+#battery.warning:not(.charging) {
+    background-color: @color3; /* Replaced #ffbe61 (Orange) */
+    color: @background;
+}
+
+#battery.critical:not(.charging) {
+    background-color: @color1; /* Replaced #f53c3c (Red) */
+    color: @foreground;        /* Replaced #ffffff */
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: @foreground; /* Replaced #ffffff */
+        color: @background;            /* Replaced #000000 */
+    }
+}

@@ -1,0 +1,83 @@
+{
+    "layer": "top",
+    "position": "top",
+    "reload_style_on_change": true,
+    "modules-left": [
+        "custom/logo",
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "image#album-art",   
+        "custom/spotify"
+    ],
+    "modules-right": [
+        "network",
+        "battery",
+        "disk",
+        "memory",
+        "clock"
+    ],
+    "custom/logo": {
+        "format": "",
+        "tooltip": false
+    },
+    "clock": {
+        "format": "{:%I:%M:%S %p}",
+        "interval": 1
+    },
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "default": "",
+            "active": ""
+        }
+    },
+    "disk": {
+        "interval": 30,
+        "format": "DISk : {percentage_used}%",
+        "path": "/"
+    },
+    "memory": {
+        "format": "MEM : {percentage}%"
+    },
+    "network": {
+        "format-wifi": " ",
+        "format-ethernet": " ",
+        "format-disconnected": "",
+        "tooltip-format": "{ipaddr}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
+        "tooltip-format-ethernet": "{ifname} 🖧 | {ipaddr}"
+    },
+    "battery": {
+        "interval": 1,
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 20
+        },
+        "format": " {icon} : {capacity}%",
+        "format-charging": "{capacity}% 󰂄 ",
+        "format-plugged": "{capacity}% 󰂄 ",
+        "format-alt": "{time} {icon}",
+        "format-icons": [
+            "󰁻",
+            "󰁼",
+            "󰁾",
+            "󰂀",
+            "󰂂",
+            "󰁹"
+        ]
+    },
+      "image#album-art": {
+        "path": "/tmp/spotify_cover.jpg",
+        "size": 32,
+        "interval": 1,
+        "on-click": "~/.config/waybar/album_art.sh"
+    },
+  "custom/spotify": {
+        "exec": "$HOME/.config/waybar/spotify.sh", 
+        "format": "  {}",
+        "interval": 1
+
+    }
+}

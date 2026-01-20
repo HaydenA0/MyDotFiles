@@ -1,24 +1,16 @@
-# constants ?
-PDF_READER=mupdf
-export PATH=$PATH:~/.cargo/bin/
-COLOR_RED='\033[0;31m'
-COLOR_RESET='\033[0m'
+export ZDOTDIR="$HOME/.config/zsh"
+export PATH="$HOME/.local/bin:$PATH"
 
-[[ $- != *i* ]] && return
-# river
-if [ -z "$WAYLAND_DISPLAY" ] && [ $(tty) = "/dev/tty1" ]; then
-  exec river
-fi
-# cmd line
-PS1="${COLOR_RED} \w\n${COLOR_RESET} $ "
+(cat ~/.cache/wal/sequences &)
+PS1='%~
+$ '
 
-# evaluation
-eval "$(zoxide init bash)"
+
+eval "$(zoxide init zsh)"
 
 
 
 
-# my functions
 pdf() {
   $PDF_READER -I "$(fd -e pdf . | fzf)" 
 }
@@ -61,15 +53,15 @@ ff() {
 # fi
 
 # aliases
-alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias reload_bash_config='source ~/.bashrc'
-alias r='reload_bash_config'
+alias reload_zsh_config='source ~/.config/zsh/.zshrc'
+alias r='reload_zsh_config'
 alias cd='z'
 alias cr="clear ; r"
-alias ls='exa -lF --icons --color=never --group-directories-first'
+alias ls='exa -lF --icons --group-directories-first'
 alias lsa="exa -lh --total-size"
 alias cat="bat"
-alias bashc="nvim ~/.bashrc"
 alias audioctl="pavucontrol"
 alias a="ff"
+alias rf="rm -rf ~/.cache/fastfetch/"
+
