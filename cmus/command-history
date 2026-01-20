@@ -1,3 +1,9 @@
+quit
+add first_song.mp3
+add ShedATear.mp3
+add *
+add *.
+add .
 help
 ?
 pause
