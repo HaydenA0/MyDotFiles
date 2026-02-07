@@ -1,0 +1,257 @@
+10:44:33.461: Platform: Wayland
+10:44:33.461: CPU Name: 11th Gen Intel(R) Core(TM) i5-11400H @ 2.70GHz
+10:44:33.461: CPU Speed: 1009.341MHz
+10:44:33.461: Physical Cores: 6, Logical Cores: 12
+10:44:33.461: Physical Memory: 23765MB Total, 15553MB Free
+10:44:33.461: Kernel Version: Linux 6.18.6-arch1-1
+10:44:33.461: Distribution: "Arch Linux" Unknown
+10:44:33.461: Desktop Environment: Hyprland
+10:44:33.461: Session Type: wayland
+10:44:33.462: Current Date/Time: 2026-02-03, 10:44:33 AM
+10:44:33.462: Browser Hardware Acceleration: true
+10:44:33.462: Qt Version: 6.10.1 (runtime), 6.10.1 (compiled)
+10:44:33.462: Portable mode: false
+10:44:33.513: OBS 32.0.4 (linux)
+10:44:33.513: ---------------------------------
+10:44:33.513: ---------------------------------
+10:44:33.513: audio settings reset:
+10:44:33.513: 	samples per sec: 48000
+10:44:33.513: 	speakers:        2
+10:44:33.513: 	max buffering:   960 milliseconds
+10:44:33.513: 	buffering type:  dynamically increasing
+10:44:33.514: ---------------------------------
+10:44:33.514: Initializing OpenGL...
+10:44:33.514: Using EGL/Wayland
+10:44:33.552: Initialized EGL 1.5
+10:44:33.563: Loading up OpenGL on adapter Intel Mesa Intel(R) UHD Graphics (TGL GT1)
+10:44:33.563: OpenGL loaded successfully, version 4.6 (Core Profile) Mesa 25.3.3-arch1.3, shading language 4.60
+10:44:33.659: ---------------------------------
+10:44:33.659: video settings reset:
+10:44:33.659: 	base resolution:   1920x1080
+10:44:33.659: 	output resolution: 1280x720
+10:44:33.659: 	downscale filter:  Bicubic
+10:44:33.659: 	fps:               30/1
+10:44:33.659: 	format:            NV12
+10:44:33.659: 	YUV mode:          Rec. 709/Partial
+10:44:33.659: NV12 texture support enabled
+10:44:33.659: P010 texture support not available
+10:44:33.663: Audio monitoring device:
+10:44:33.663: 	name: Default
+10:44:33.663: 	id: default
+10:44:33.664: ---------------------------------
+10:44:33.665: Failed to load 'en-US' text for module: 'decklink-captions.so'
+10:44:33.666: Failed to load 'en-US' text for module: 'decklink-output-ui.so'
+10:44:33.667: A DeckLink iterator could not be created.  The DeckLink drivers may not be installed
+10:44:33.667: Failed to initialize module 'decklink.so'
+10:44:33.777: [pipewire] No capture sources available
+10:44:33.782: v4l2loopback not installed, virtual camera not registered
+10:44:33.802: VAAPI: Failed to initialize display in vaapi_device_h264_supported
+10:44:33.802: FFmpeg VAAPI H264 encoding not supported
+10:44:33.802: VAAPI: Failed to initialize display in vaapi_device_av1_supported
+10:44:33.802: FFmpeg VAAPI AV1 encoding not supported
+10:44:33.802: VAAPI: Failed to initialize display in vaapi_device_hevc_supported
+10:44:33.802: FFmpeg VAAPI HEVC encoding not supported
+10:44:34.312: [NVENC] Test process failed: cuda_init_100
+10:44:34.312: NVENC not supported
+10:44:34.312: Failed to initialize module 'obs-nvenc.so'
+10:44:34.357: [obs-websocket] [obs_module_load] you can haz websockets (Version: 5.6.3 | RPC Version: 1)
+10:44:34.357: [obs-websocket] [obs_module_load] Qt version (compile-time): 6.10.1 | Qt version (run-time): 6.10.1
+10:44:34.357: [obs-websocket] [obs_module_load] Linked ASIO Version: 103600
+10:44:34.357: [obs-websocket] [Config::Load] Existing configuration not found, using defaults.
+10:44:34.357: [obs-websocket] [Config::Load] (FirstLoad) Generating new server password.
+10:44:34.362: [obs-websocket] [obs_module_load] Module loaded.
+10:44:34.364: ---------------------------------
+10:44:34.364:   Loaded Modules:
+10:44:34.364:     text-freetype2.so
+10:44:34.364:     rtmp-services.so
+10:44:34.364:     obs-x264.so
+10:44:34.364:     obs-websocket.so
+10:44:34.364:     obs-webrtc.so
+10:44:34.364:     obs-vst.so
+10:44:34.364:     obs-transitions.so
+10:44:34.364:     obs-qsv11.so
+10:44:34.364:     obs-outputs.so
+10:44:34.364:     obs-libfdk.so
+10:44:34.364:     obs-filters.so
+10:44:34.364:     obs-ffmpeg.so
+10:44:34.364:     linux-v4l2.so
+10:44:34.364:     linux-pulseaudio.so
+10:44:34.364:     linux-pipewire.so
+10:44:34.364:     linux-jack.so
+10:44:34.364:     linux-capture.so
+10:44:34.364:     linux-alsa.so
+10:44:34.364:     image-source.so
+10:44:34.364:     frontend-tools.so
+10:44:34.364:     decklink-output-ui.so
+10:44:34.364:     decklink-captions.so
+10:44:34.364: ---------------------------------
+10:44:34.364: ---------------------------------
+10:44:34.364: Available Encoders:
+10:44:34.364:   Video Encoders:
+10:44:34.364: 	- ffmpeg_svt_av1 (SVT-AV1)
+10:44:34.364: 	- ffmpeg_aom_av1 (AOM AV1)
+10:44:34.364: 	- obs_x264 (x264)
+10:44:34.364:   Audio Encoders:
+10:44:34.364: 	- ffmpeg_aac (FFmpeg AAC)
+10:44:34.364: 	- ffmpeg_opus (FFmpeg Opus)
+10:44:34.364: 	- ffmpeg_pcm_s16le (FFmpeg PCM (16-bit))
+10:44:34.364: 	- ffmpeg_pcm_s24le (FFmpeg PCM (24-bit))
+10:44:34.364: 	- ffmpeg_pcm_f32le (FFmpeg PCM (32-bit float))
+10:44:34.364: 	- ffmpeg_alac (FFmpeg ALAC (24-bit))
+10:44:34.364: 	- ffmpeg_flac (FFmpeg FLAC (16-bit))
+10:44:34.364: 	- libfdk_aac (libfdk AAC)
+10:44:34.364: ==== Startup complete ===============================================
+10:44:34.367: No scene file found, creating default scene
+10:44:34.410: Failed to register with host portal QDBusError("org.freedesktop.DBus.Error.ServiceUnknown", "The name is not activatable")
+10:44:34.411: All scene data cleared
+10:44:34.411: ------------------------------------------------
+10:44:34.420: Device for 'Audio Output Capture' source Desktop Audio is also used for audio monitoring.
+10:44:34.420: Deduplication logic is being applied to all monitored sources.
+10:44:34.420: pulse-input: Server name: 'PulseAudio (on PipeWire 1.4.10) 15.0.0'
+10:44:34.420: pulse-input: Audio format: s32le, 48000 Hz, 2 channels
+10:44:34.420: pulse-input: Started recording from 'alsa_output.pci-0000_00_1f.3.analog-stereo.monitor' (default)
+10:44:34.421: pulse-input: Server name: 'PulseAudio (on PipeWire 1.4.10) 15.0.0'
+10:44:34.421: pulse-input: Audio format: s32le, 48000 Hz, 2 channels
+10:44:34.421: pulse-input: Started recording from 'alsa_input.pci-0000_00_1f.3.analog-stereo' (default)
+10:44:34.421: Switched to scene 'Scene'
+10:44:34.422: Created scene collection 'Untitled' (clean, Untitled.json)
+10:44:34.422: ------------------------------------------------
+10:44:34.460: Device for 'Audio Output Capture' source Desktop Audio is also used for audio monitoring.
+10:44:34.460: Deduplication logic is being applied to all monitored sources.
+10:44:34.964: adding 21 milliseconds of audio buffering, total audio buffering is now 21 milliseconds (source: Desktop Audio)
+10:44:34.964: 
+10:44:39.721: 
+10:44:39.721: ==== Auto-config wizard testing commencing ======
+
+10:44:39.730: ---------------------------------
+10:44:39.730: video settings reset:
+10:44:39.730: 	base resolution:   1920x1080
+10:44:39.730: 	output resolution: 1920x1080
+10:44:39.730: 	downscale filter:  Bicubic
+10:44:39.730: 	fps:               60/1
+10:44:39.730: 	format:            NV12
+10:44:39.730: 	YUV mode:          Rec. 709/Partial
+10:44:39.730: NV12 texture support enabled
+10:44:39.730: P010 texture support not available
+10:44:39.733: Output 'null': Tried to use obs_output_set_media on an encoded output
+10:44:39.733: ---------------------------------
+10:44:39.733: [x264 encoder: 'test_x264'] preset: veryfast
+10:44:39.733: [x264 encoder: 'test_x264'] profile: high
+10:44:39.740: [x264 encoder: 'test_x264'] settings:
+10:44:39.740: 	rate_control: CRF
+10:44:39.740: 	bitrate:      0
+10:44:39.740: 	buffer size:  0
+10:44:39.740: 	crf:          20
+10:44:39.740: 	fps_num:      60
+10:44:39.740: 	fps_den:      1
+10:44:39.740: 	width:        1920
+10:44:39.740: 	height:       1080
+10:44:39.740: 	keyint:       250
+10:44:39.740: 
+10:44:39.748: ---------------------------------
+10:44:39.748: [FFmpeg aac encoder: 'test_aac'] bitrate: 32, channels: 2, channel_layout: stereo, track: 1
+10:44:39.748: 
+10:44:44.749: Output 'null': stopping
+10:44:44.749: Output 'null': Total frames output: 267
+10:44:44.749: Output 'null': Total drawn frames: 300
+10:44:44.834: ---------------------------------
+10:44:44.834: video settings reset:
+10:44:44.834: 	base resolution:   1920x1080
+10:44:44.834: 	output resolution: 1920x1080
+10:44:44.834: 	downscale filter:  Bicubic
+10:44:44.834: 	fps:               30/1
+10:44:44.834: 	format:            NV12
+10:44:44.834: 	YUV mode:          Rec. 709/Partial
+10:44:44.834: NV12 texture support enabled
+10:44:44.834: P010 texture support not available
+10:44:44.836: Output 'null': Tried to use obs_output_set_media on an encoded output
+10:44:44.836: ---------------------------------
+10:44:44.836: [x264 encoder: 'test_x264'] preset: veryfast
+10:44:44.836: [x264 encoder: 'test_x264'] profile: high
+10:44:44.836: [x264 encoder: 'test_x264'] settings:
+10:44:44.836: 	rate_control: CRF
+10:44:44.836: 	bitrate:      0
+10:44:44.836: 	buffer size:  0
+10:44:44.836: 	crf:          20
+10:44:44.836: 	fps_num:      30
+10:44:44.836: 	fps_den:      1
+10:44:44.836: 	width:        1920
+10:44:44.836: 	height:       1080
+10:44:44.836: 	keyint:       250
+10:44:44.836: 
+10:44:44.848: ---------------------------------
+10:44:44.848: [FFmpeg aac encoder: 'test_aac'] bitrate: 32, channels: 2, channel_layout: stereo, track: 1
+10:44:44.848: 
+10:44:49.848: Output 'null': stopping
+10:44:49.848: Output 'null': Total frames output: 117
+10:44:49.848: Output 'null': Total drawn frames: 150
+10:44:49.936: ---------------------------------
+10:44:49.936: video settings reset:
+10:44:49.936: 	base resolution:   1920x1080
+10:44:49.936: 	output resolution: 1280x720
+10:44:49.936: 	downscale filter:  Bicubic
+10:44:49.936: 	fps:               60/1
+10:44:49.936: 	format:            NV12
+10:44:49.936: 	YUV mode:          Rec. 709/Partial
+10:44:49.936: NV12 texture support enabled
+10:44:49.936: P010 texture support not available
+10:44:49.938: Output 'null': Tried to use obs_output_set_media on an encoded output
+10:44:49.938: ---------------------------------
+10:44:49.938: [x264 encoder: 'test_x264'] preset: veryfast
+10:44:49.938: [x264 encoder: 'test_x264'] profile: high
+10:44:49.938: [x264 encoder: 'test_x264'] settings:
+10:44:49.938: 	rate_control: CRF
+10:44:49.938: 	bitrate:      0
+10:44:49.938: 	buffer size:  0
+10:44:49.938: 	crf:          20
+10:44:49.938: 	fps_num:      60
+10:44:49.938: 	fps_den:      1
+10:44:49.938: 	width:        1280
+10:44:49.938: 	height:       720
+10:44:49.938: 	keyint:       250
+10:44:49.938: 
+10:44:49.941: ---------------------------------
+10:44:49.941: [FFmpeg aac encoder: 'test_aac'] bitrate: 32, channels: 2, channel_layout: stereo, track: 1
+10:44:49.941: 
+10:44:54.942: Output 'null': stopping
+10:44:54.942: Output 'null': Total frames output: 267
+10:44:54.942: Output 'null': Total drawn frames: 300
+10:44:54.988: ---------------------------------
+10:44:54.988: video settings reset:
+10:44:54.988: 	base resolution:   1920x1080
+10:44:54.988: 	output resolution: 1280x720
+10:44:54.988: 	downscale filter:  Bicubic
+10:44:54.988: 	fps:               30/1
+10:44:54.988: 	format:            NV12
+10:44:54.988: 	YUV mode:          Rec. 709/Partial
+10:44:54.988: NV12 texture support enabled
+10:44:54.988: P010 texture support not available
+10:44:54.994: Device for 'Audio Output Capture' source Desktop Audio is also used for audio monitoring.
+10:44:54.994: Deduplication logic is being applied to all monitored sources.
+10:45:14.391: ---------------------------------
+10:45:14.391: video settings reset:
+10:45:14.391: 	base resolution:   1920x1080
+10:45:14.391: 	output resolution: 1920x1080
+10:45:14.391: 	downscale filter:  Bicubic
+10:45:14.391: 	fps:               60/1
+10:45:14.391: 	format:            NV12
+10:45:14.391: 	YUV mode:          Rec. 709/Partial
+10:45:14.391: NV12 texture support enabled
+10:45:14.391: P010 texture support not available
+10:45:14.395: 
+10:45:14.395: ==== Auto-config wizard testing stopping ========
+
+10:45:25.943: ==== Shutting down ==================================================
+10:45:25.945: pulse-input: Stopped recording from 'alsa_output.pci-0000_00_1f.3.analog-stereo.monitor'
+10:45:25.945: pulse-input: Got 2060 packets with 2472000 frames
+10:45:25.945: Deduplication logic stopped.
+10:45:25.945: pulse-input: Stopped recording from 'alsa_input.pci-0000_00_1f.3.analog-stereo'
+10:45:25.945: pulse-input: Got 2060 packets with 2472000 frames
+10:45:25.975: All scene data cleared
+10:45:25.975: ------------------------------------------------
+10:45:25.976: Crash sentinel location '/home/anasr/.config/obs-studio/.sentinel' does not exist
+10:45:26.038: [obs-websocket] [obs_module_unload] Shutting down...
+10:45:26.038: Tried to call obs_frontend_remove_event_callback with no callbacks!
+10:45:26.038: [obs-websocket] [obs_module_unload] Finished shutting down.
+10:45:26.044: [Scripting] Total detached callbacks: 0
+10:45:26.044: Freeing OBS context data

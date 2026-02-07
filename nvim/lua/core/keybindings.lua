@@ -40,3 +40,5 @@ vim.keymap.set("n", "<leader>t", function()
 	local cwd = vim.fn.getcwd()
 	os.execute("tmux split-window -v -c " .. cwd)
 end, { desc = "Open Tmux in Oil CWD" })
+
+

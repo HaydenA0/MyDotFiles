@@ -3,34 +3,21 @@
     "position": "top",
     "reload_style_on_change": true,
     "modules-left": [
-        "custom/logo",
-        "hyprland/workspaces"
+        "network",
+        "battery"
     ],
     "modules-center": [
         "image#album-art",   
         "custom/spotify"
     ],
     "modules-right": [
-        "network",
-        "battery",
         "disk",
         "memory",
         "clock"
     ],
-    "custom/logo": {
-        "format": "",
-        "tooltip": false
-    },
     "clock": {
-        "format": "{:%I:%M:%S %p}",
+        "format": "/ {:%I:%M %p}",
         "interval": 1
-    },
-    "hyprland/workspaces": {
-        "format": "{icon}",
-        "format-icons": {
-            "default": "",
-            "active": ""
-        }
     },
     "disk": {
         "interval": 30,
@@ -38,12 +25,12 @@
         "path": "/"
     },
     "memory": {
-        "format": "MEM : {percentage}%"
+        "format": "/ MEM : {percentage}%"
     },
     "network": {
-        "format-wifi": " ",
-        "format-ethernet": " ",
-        "format-disconnected": "",
+        "format-wifi": "  ",
+        "format-ethernet": "  ",
+        "format-disconnected": "  ",
         "tooltip-format": "{ipaddr}",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
         "tooltip-format-ethernet": "{ifname} 🖧 | {ipaddr}"
@@ -55,7 +42,7 @@
             "warning": 30,
             "critical": 20
         },
-        "format": " {icon} : {capacity}%",
+        "format": "/ {icon} : {capacity}%",
         "format-charging": "{capacity}% 󰂄 ",
         "format-plugged": "{capacity}% 󰂄 ",
         "format-alt": "{time} {icon}",
@@ -76,8 +63,7 @@
     },
   "custom/spotify": {
         "exec": "$HOME/.config/waybar/spotify.sh", 
-        "format": "  {}",
+        "format": "  {}   ",
         "interval": 1
-
     }
 }

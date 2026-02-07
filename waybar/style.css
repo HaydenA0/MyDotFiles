@@ -2,10 +2,10 @@
 
 * {
     border: none;
-    font-size: 16px;
+    font-size: 18px;
     font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF" ;
     font-weight: bold;
-    min-height: 22px;
+    min-height: 24px;
     /* Set default text color to the theme foreground */
     color: @foreground;
 }

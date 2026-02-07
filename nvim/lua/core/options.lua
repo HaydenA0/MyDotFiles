@@ -16,13 +16,13 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.list = true
-vim.opt.listchars = {
-	tab = "··",
-	trail = " ",
-	extends = ">",
-	precedes = "<",
-	space = "·",
-}
+-- vim.opt.listchars = {
+-- 	tab = " ",
+-- 	trail = " ",
+-- 	extends = ">",
+-- 	precedes = "<",
+-- 	space = "·",
+-- }
 -- vim.api.nvim_create_autocmd("FileType", {
 -- 	pattern = "*",
 -- 	callback = function()
@@ -34,3 +34,4 @@ vim.opt.errorformat = [=[%f:%l:%c:%m,%f:%l:%m,%f:%l,%-G%.%]=]
 vim.opt.errorformat:append([[ %f:%l:%c:%m ]])
 vim.opt.errorformat:append([[ %f:%l:%m ]])
 vim.opt.errorformat:append([[ %f:%l ]])
+

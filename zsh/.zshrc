@@ -1,14 +1,8 @@
-
-
-
-
-
-
 bindkey -v
 [[ -o interactive ]] || return
 HISTFILE=~/.config/zsh/.zsh_history
-HISTSIZE=50000
-SAVEHIST=50000
+HISTSIZE=200000
+SAVEHIST=200000
 setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
@@ -18,17 +12,16 @@ autoload -Uz compinit
 compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' auto-description 'format'
-bindkey "${terminfo[kcuu1]}" history-beginning-search-backward
-bindkey "${terminfo[kcud1]}" history-beginning-search-forward
 if [[ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
     source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=blue,bold'
-
 fi
 if [[ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
     source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
     ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 fi
+bindkey '^I' autosuggest-accept
+bindkey '\e^I' expand-or-complete
 
 
 export ZDOTDIR="$HOME/.config/zsh"
@@ -54,7 +47,10 @@ alias audioctl="pavucontrol"
 alias a="ff"
 alias rf="rm -rf ~/.cache/fastfetch/"
 alias ae="auto_env"
-
+alias clip="wl-copy"
+alias rw="sudo systemctl restart iwd"
+alias latex_compile="pdflatex -interaction=nonstopmode -halt-on-error -output-directory=build"
+alias dclean="~/dev/projects/downloadsOrganizer/binary/cleaner"
 
 function mkvenv() {
   python -m venv .venv
@@ -102,4 +98,7 @@ ta() {
 
 
 
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
 
