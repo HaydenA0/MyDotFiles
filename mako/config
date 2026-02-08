@@ -1,0 +1,11 @@
+# ~/.config/mako/config
+
+# wider notification area
+width=500
+
+# taller maximum popup height
+height=300
+
+# longer default display time
+default-timeout=8000
+

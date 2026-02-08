@@ -52,6 +52,12 @@ alias rw="sudo systemctl restart iwd"
 alias latex_compile="pdflatex -interaction=nonstopmode -halt-on-error -output-directory=build"
 alias dclean="~/dev/projects/downloadsOrganizer/binary/cleaner"
 
+
+function define() {
+  notify-send -t 0 "$(python ~/dev/projects/definition/main.py "$1")"
+}
+
+
 function mkvenv() {
   python -m venv .venv
   source .venv/bin/activate
