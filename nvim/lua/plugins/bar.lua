@@ -41,7 +41,11 @@ return {
 				lualine_c = { "filename" },
 				lualine_x = { "filetype" },
 				lualine_y = {},
-				lualine_z = {},
+				lualine_z = {
+					function()
+						return os.date("%H:%M:%S")
+					end,
+				},
 			},
 			inactive_sections = {
 				lualine_a = {},
