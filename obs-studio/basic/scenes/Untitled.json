@@ -1,8 +1,9 @@
 {
+    "name": "Untitled",
     "DesktopAudioDevice1": {
-        "prev_ver": 536870916,
+        "prev_ver": 536936449,
         "name": "Desktop Audio",
-        "uuid": "c4a3c3e2-afff-4453-a2a2-008b9cc6a647",
+        "uuid": "2e9418d7-3d90-4c34-b0af-018ad0376f3d",
         "id": "pulse_output_capture",
         "versioned_id": "pulse_output_capture",
         "settings": {
@@ -11,7 +12,7 @@
         "mixers": 255,
         "sync": 0,
         "flags": 0,
-        "volume": 1.0,
+        "volume": 0.506986141204834,
         "balance": 0.5,
         "enabled": true,
         "muted": false,
@@ -31,9 +32,9 @@
         "private_settings": {}
     },
     "AuxAudioDevice1": {
-        "prev_ver": 536870916,
+        "prev_ver": 536936449,
         "name": "Mic/Aux",
-        "uuid": "3b92c578-f236-485a-8c48-7559625e6339",
+        "uuid": "014f46a2-fcdf-4c3b-aabe-b1b2e3caaebd",
         "id": "pulse_input_capture",
         "versioned_id": "pulse_input_capture",
         "settings": {
@@ -42,7 +43,7 @@
         "mixers": 255,
         "sync": 0,
         "flags": 0,
-        "volume": 1.0,
+        "volume": 0.0,
         "balance": 0.5,
         "enabled": true,
         "muted": false,
@@ -61,28 +62,46 @@
         "monitoring_type": 0,
         "private_settings": {}
     },
-    "current_scene": "Scene",
-    "current_program_scene": "Scene",
-    "scene_order": [
-        {
-            "name": "Scene"
-        }
-    ],
-    "name": "Untitled",
     "sources": [
         {
-            "prev_ver": 536870916,
+            "prev_ver": 536936449,
+            "name": "Screen Capture (PipeWire)",
+            "uuid": "3e7ec227-98ff-4771-ad89-f88137bf0241",
+            "id": "pipewire-screen-capture-source",
+            "versioned_id": "pipewire-screen-capture-source",
+            "settings": {
+                "RestoreToken": "6cb294dd-fda6-4b3c-8c43-8f6b5c9285c8"
+            },
+            "mixers": 0,
+            "sync": 0,
+            "flags": 0,
+            "volume": 1.0,
+            "balance": 0.5,
+            "enabled": true,
+            "muted": false,
+            "push-to-mute": false,
+            "push-to-mute-delay": 0,
+            "push-to-talk": false,
+            "push-to-talk-delay": 0,
+            "hotkeys": {},
+            "deinterlace_mode": 0,
+            "deinterlace_field_order": 0,
+            "monitoring_type": 0,
+            "private_settings": {}
+        },
+        {
+            "prev_ver": 536936449,
             "name": "Scene",
-            "uuid": "2c5d74fa-0f7f-4b40-b2f0-858d7c687567",
+            "uuid": "634e87ac-7e3c-457c-b2e7-63780c2a06b4",
             "id": "scene",
             "versioned_id": "scene",
             "settings": {
-                "id_counter": 3,
+                "id_counter": 1,
                 "custom_size": false,
                 "items": [
                     {
                         "name": "Screen Capture (PipeWire)",
-                        "source_uuid": "2e16bd24-6d21-40b8-a18a-e2ee42f80ad5",
+                        "source_uuid": "3e7ec227-98ff-4771-ad89-f88137bf0241",
                         "visible": true,
                         "locked": false,
                         "rot": 0.0,
@@ -109,12 +128,12 @@
                             "y": -1.0
                         },
                         "scale": {
-                            "x": 1.0776596069335938,
-                            "y": 1.077844262123108
+                            "x": 1.0,
+                            "y": 1.0
                         },
                         "scale_rel": {
-                            "x": 1.0776596069335938,
-                            "y": 1.077844262123108
+                            "x": 1.0,
+                            "y": 1.0
                         },
                         "bounds": {
                             "x": 0.0,
@@ -128,10 +147,10 @@
                         "blend_method": "default",
                         "blend_type": "normal",
                         "show_transition": {
-                            "duration": 0
+                            "duration": 300
                         },
                         "hide_transition": {
-                            "duration": 0
+                            "duration": 300
                         },
                         "private_settings": {}
                     }
@@ -158,35 +177,20 @@
             "monitoring_type": 0,
             "canvas_uuid": "6c69626f-6273-4c00-9d88-c5136d61696e",
             "private_settings": {}
-        },
-        {
-            "prev_ver": 536870916,
-            "name": "Screen Capture (PipeWire)",
-            "uuid": "2e16bd24-6d21-40b8-a18a-e2ee42f80ad5",
-            "id": "pipewire-screen-capture-source",
-            "versioned_id": "pipewire-screen-capture-source",
-            "settings": {
-                "RestoreToken": ""
-            },
-            "mixers": 0,
-            "sync": 0,
-            "flags": 0,
-            "volume": 1.0,
-            "balance": 0.5,
-            "enabled": true,
-            "muted": false,
-            "push-to-mute": false,
-            "push-to-mute-delay": 0,
-            "push-to-talk": false,
-            "push-to-talk-delay": 0,
-            "hotkeys": {},
-            "deinterlace_mode": 0,
-            "deinterlace_field_order": 0,
-            "monitoring_type": 0,
-            "private_settings": {}
         }
     ],
     "groups": [],
+    "scene_order": [
+        {
+            "name": "Scene"
+        }
+    ],
+    "current_scene": "Scene",
+    "current_program_scene": "Scene",
+    "canvases": [],
+    "current_transition": "Fade",
+    "transition_duration": 300,
+    "transitions": [],
     "quick_transitions": [
         {
             "name": "Cut",
@@ -210,14 +214,10 @@
             "fade_to_black": true
         }
     ],
-    "transitions": [],
     "saved_projectors": [],
-    "canvases": [],
-    "current_transition": "Fade",
-    "transition_duration": 300,
     "preview_locked": false,
     "scaling_enabled": false,
-    "scaling_level": -6,
+    "scaling_level": -7,
     "scaling_off_x": 0.0,
     "scaling_off_y": 0.0,
     "modules": {

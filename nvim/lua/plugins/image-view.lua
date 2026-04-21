@@ -2,7 +2,7 @@ return {
 	"3rd/image.nvim",
 	config = function()
 		require("image").setup({
-			backend = "sixel", -- or "ueberzug" or "sixel"
+			backend = "kitty", -- or "ueberzug" or "sixel"
 			processor = "magick_cli", -- or "magick_rock"
 			integrations = {
 				markdown = {

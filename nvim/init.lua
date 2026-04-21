@@ -1,4 +1,6 @@
 vim.g.mapleader = " "
+require("vim._core.ui2").enable()
+
 require("core.keybindings")
 require("core.custom_commands")
 require("core.options")

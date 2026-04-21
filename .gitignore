@@ -1,0 +1,8 @@
+/*
+!.gitignore
+
+!/kitty/
+!/niri/
+!/nvim/
+!/zsh/
+!/scripts/

@@ -1,101 +1,82 @@
--- return {
--- 	{
--- 		"nvim-telescope/telescope.nvim",
--- 		tag = "0.1.8",
--- 		dependencies = { "nvim-lua/plenary.nvim" },
--- 		config = function()
--- 			local builtin = require("telescope.builtin")
---
--- 			require("telescope").setup({
--- 				pickers = {
--- 					find_files = { theme = "ivy" },
--- 					buffers = { theme = "ivy" },
--- 					oldfiles = { theme = "ivy" },
--- 				},
--- 			})
---
--- 			vim.keymap.set("n", "<leader><leader>", builtin.find_files, { desc = "Find files in current directory" })
---
--- 			vim.keymap.set("n", "<leader>fh", function()
--- 				builtin.find_files({ cwd = vim.env.HOME })
--- 			end, { desc = "Find files in home" })
---
--- 			vim.keymap.set("n", "<leader>fc", function()
--- 				builtin.find_files({ cwd = vim.env.HOME .. "/.config" })
--- 			end, { desc = "Find files in ~/.config/" })
---
--- 			vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Recent files" })
---
--- 			vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Open buffers" })
---
--- 			vim.keymap.set("n", "<leader>fg", function()
--- 				builtin.live_grep({ cwd = vim.loop.cwd() })
--- 			end, { desc = "Live grep in current directory" })
--- 		end,
--- 	},
--- 	{
--- 		"nvim-telescope/telescope-ui-select.nvim",
--- 		config = function()
--- 			-- Calling setup should be inside the config function.
--- 			require("telescope").setup({
--- 				extensions = {
--- 					["ui-select"] = {
--- 						-- The get_dropdown function already returns a table,
--- 						-- so you don't need to wrap it in another one.
--- 						-- You also had a typo here ("themes" was missing the 's')
--- 						require("telescope.themes").get_dropdown({
--- 							-- You can add options for the dropdown theme here
--- 						}),
--- 					},
--- 				},
--- 			})
---
--- 			-- Loading the extension must also be inside the config function.
--- 			require("telescope").load_extension("ui-select")
--- 		end,
--- 	},
--- }
---
 return {
-	-- "nvim-telescope/telescope.nvim",
-	-- tag = "v0.2.0",
-	-- dependencies = { "nvim-lua/plenary.nvim" },
-	--
-	-- config = function()
-	-- 	require("telescope").setup({
-	-- 		pickers = {
-	-- 			find_files = {
-	-- 				theme = "ivy",
-	-- 				winblend = 0,
-	-- 				previewer = false,
-	-- 			},
-	-- 			oldfiles = {
-	-- 				theme = "ivy",
-	-- 				winblend = 0,
-	-- 				previewer = false,
-	-- 			},
-	-- 			current_buffer_fuzzy_find = {
-	-- 				theme = "ivy",
-	-- 				winblend = 0,
-	-- 				previewer = false,
-	-- 			},
-	-- 		},
-	-- 		extensions = {
-	-- 			fzf = {},
-	-- 		},
-	-- 	})
-	-- 	require("telescope").load_extension("fzf")
-	-- 	local builtin = require("telescope.builtin")
-	-- 	local map = vim.keymap.set
-	--
-	-- 	map("n", "<C-p>", builtin.find_files, { desc = "Telescope find files" })
-	-- 	map("n", "<leader>r", builtin.oldfiles, { desc = "Recent files" })
-	-- 	map("n", "<leader>f", builtin.current_buffer_fuzzy_find, { desc = "fzf find stuff" })
-	-- 	map("n", "<leader>g", builtin.live_grep, { desc = "grep in a project" })
-	-- 	map("n", "<leader>fc", function()
-	-- 		builtin.find_files({
-	-- 			cwd = vim.fn.stdpath("config"),
-	-- 		})
-	-- 	end)
-	-- end,
+	"nvim-telescope/telescope.nvim",
+	version = "*",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"nvim-tree/nvim-web-devicons",
+		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+	},
+
+	config = function()
+		local telescope = require("telescope")
+		local actions = require("telescope.actions")
+		local action_state = require("telescope.actions.state")
+
+		local open_in_oil = function(prompt_bufnr)
+			local entry = action_state.get_selected_entry()
+			actions.close(prompt_bufnr)
+			local path = entry.path or entry.filename
+			local dir = vim.fn.fnamemodify(path, ":h")
+			require("oil").open(dir)
+		end
+
+		telescope.setup({
+			defaults = {
+				mappings = {
+					i = {
+						["<C-j>"] = actions.move_selection_next,
+						["<C-k>"] = actions.move_selection_previous,
+						["<M-e>"] = open_in_oil,
+					},
+					n = {
+						["<C-j>"] = actions.move_selection_next,
+						["<C-k>"] = actions.move_selection_previous,
+						["<M-e>"] = open_in_oil,
+					},
+				},
+			},
+		})
+
+		pcall(telescope.load_extension, "fzf")
+
+		local keymap = vim.keymap.set
+
+		keymap("n", "<C-p>", function()
+			local ok = pcall(require("telescope.builtin").git_files)
+			if not ok then
+				require("telescope.builtin").find_files()
+			end
+		end, { desc = "Find Project Files" })
+
+		keymap("n", "<leader>fr", "<cmd>Telescope oldfiles<CR>", { desc = "Find Recent Files" })
+
+		keymap("n", "<leader>fc", function()
+			require("telescope.builtin").find_files({
+				prompt_title = "Config Files",
+				cwd = vim.fn.expand("~/.config"),
+			})
+		end, { desc = "Find Config Files" })
+
+		keymap("n", "<leader>j", function()
+			local results = vim.fn.systemlist("zoxide query -l")
+			require("telescope.pickers")
+				.new({}, {
+					prompt_title = "Teleport (Zoxide)",
+					finder = require("telescope.finders").new_table({ results = results }),
+					sorter = require("telescope.config").values.generic_sorter({}),
+					attach_mappings = function(prompt_bufnr)
+						actions.select_default:replace(function()
+							actions.close(prompt_bufnr)
+							local selection = action_state.get_selected_entry()
+							require("oil").open(selection[1])
+						end)
+						return true
+					end,
+				})
+				:find()
+		end, { desc = "Zoxide Teleport" })
+
+		keymap("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Find by Grep" })
+		keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Find Buffers" })
+	end,
 }

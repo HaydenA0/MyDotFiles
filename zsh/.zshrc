@@ -26,9 +26,11 @@ bindkey '\e^I' expand-or-complete
 
 export ZDOTDIR="$HOME/.config/zsh"
 export PATH="$HOME/.local/bin:$PATH"
+export BROWSER=zen-browser
 
-PS1='%~
-$ '
+# PS1='%~
+# $ '
+eval "$(starship init zsh)"
 
 (cat ~/.cache/wal/sequences &)
 
@@ -40,8 +42,8 @@ alias reload_zsh_config='source ~/.config/zsh/.zshrc'
 alias r='reload_zsh_config'
 alias cd='z'
 alias cr="clear ; r"
-alias ls='exa -lF --icons --group-directories-first'
-alias lsa="exa -lh --total-size"
+alias ls='eza -lF --icons --group-directories-first'
+alias lsa="eza -lh --total-size"
 alias cat="bat"
 alias audioctl="pavucontrol"
 alias a="ff"
@@ -50,8 +52,6 @@ alias ae="auto_env"
 alias clip="wl-copy"
 alias rw="sudo systemctl restart iwd"
 alias latex_compile="pdflatex -interaction=nonstopmode -halt-on-error -output-directory=build"
-alias dclean="~/dev/projects/downloadsOrganizer/binary/cleaner"
-
 
 function define() {
   notify-send -t 0 "$(python ~/dev/projects/definition/main.py "$1")"
@@ -98,13 +98,7 @@ ta() {
   fi
 }
 
-
-
-
-
-
-
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
+if [ -z "$TMUX" ]; then
+  tmux attach || tmux
+fi
 
