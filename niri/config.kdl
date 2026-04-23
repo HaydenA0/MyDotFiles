@@ -355,6 +355,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open a Terminal: Kitty" { spawn "kitty"; }
+    Mod+T { spawn-sh "kitty"; }
     Mod+D hotkey-overlay-title="Run an Application: Viciane" { spawn-sh "vicinae toggle"; }
     Mod+B { spawn-sh "pgrep -x waybar > /dev/null && killall waybar || waybar &"; }
     Mod+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
@@ -396,7 +397,9 @@ binds {
 
     Mod+H     { focus-column-left; }
     Mod+J     { focus-column-left; }
+    Mod+A     { focus-column-left; }
     Mod+K     { focus-column-right; }
+    Mod+S     { focus-column-right; }
     Mod+L     { focus-column-right; }
 
     Mod+Shift+H     { move-column-left; }

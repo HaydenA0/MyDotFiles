@@ -7,7 +7,7 @@ return {
 	config = function()
 		require("mason").setup()
 
-		local to_install = { "lua_ls", "clangd", "pyright", "gopls", "rust_analyzer", "gdscript" }
+		local to_install = { "lua_ls", "clangd", "ty", "gopls", "rust_analyzer", "gdscript" }
 		local keymap = vim.keymap.set
 		keymap("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
 
