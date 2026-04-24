@@ -435,7 +435,7 @@
 #: The width of the scroll bar when the mouse is hovering over it, in
 #: units of cell width.
 
-# scrollbar_handle_opacity 0.5
+# scrollbar_handle_opacity 0.
 
 #: The opacity of the scrollbar handle, 0 being fully transparent and
 #: 1 being full opaque.
@@ -3149,22 +3149,14 @@
 #: }}}
 
 #: }}}
-
-
-
-font_family      family="JetBrainsMono Nerd Font Mono"
-bold_font        auto
-italic_font      auto
-bold_italic_font auto
-
 font_size 14
 confirm_os_window_close 0
 
 map ctrl+equal increase_font_size
 map ctrl+minus decrease_font_size
 map ctrl+0     reset_font_size    
-background_opacity 0.9
-window_padding_width 0
+background_opacity 0.5
+window_padding_width 80
 cursor_shape block
 cursor_beam_thickness 1.5
 cursor_underline_thickness 2.0
@@ -3172,7 +3164,20 @@ shell_integration no-cursor
 
 cursor_trail 1
     
-allow_remote_control yes
+map ctrl+f1 remote_control set-spacing padding=50
+map ctrl+f2 remote_control set-spacing padding=0
+
+# allow_remote_control yes
+allow_remote_control socket-only
+listen_on unix:/tmp/kitty_remote_control
 
 
 
+
+
+# BEGIN_KITTY_FONTS
+font_family      family="Iosevka"
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+# END_KITTY_FONTS
