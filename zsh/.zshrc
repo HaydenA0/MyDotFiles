@@ -2,6 +2,11 @@
 
 
 bindkey -v
+autoload -Uz edit-command-line
+zle -N edit-command-line
+VISUAL=nvim
+bindkey '^E' edit-command-line
+
 [[ -o interactive ]] || return
 
 
@@ -50,8 +55,8 @@ if [[ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
 fi
 
 
-bindkey '^I' autosuggest-accept
-bindkey '\e^I' expand-or-complete
+bindkey '^I' expand-or-complete
+bindkey '\e^I' autosuggest-accept
 
 
 

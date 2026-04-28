@@ -4,4 +4,3 @@ connect.mdns_devices="[{\"created_timestamp\":1777325037,\"device_id\":\"f8747f4
 audio.crossfade_v2=true
 audio.crossfade.time_v2=8000
 ui.hide_hpto=true
-app.player.volume=59952
