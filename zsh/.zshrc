@@ -57,7 +57,7 @@ bindkey '\e^I' expand-or-complete
 
 
 eval "$(starship init zsh)"
-(cat ~/.cache/wal/sequences &)
+# (cat ~/.cache/wal/sequences &)
 eval "$(zoxide init zsh)"
 
 
@@ -88,6 +88,7 @@ alias ae="auto_env"
 alias latex_compile="pdflatex -interaction=nonstopmode -halt-on-error -output-directory=build"
 
 alias night="gammastep -O 3000"
+alias pdf='zen-browser "$(fd . -e pdf | fzf)"'
 
 
 

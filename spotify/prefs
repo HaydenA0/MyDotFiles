@@ -7,7 +7,6 @@ app.window.position.width=1920
 es.send-on-startup=true
 core.clock_delta=0
 storage.last-location="/home/anasr/.cache/spotify/Storage"
-app.window.state=4
 app.window.position.saved=true
 app.window.position.height=1080
 app.last-launched-version="1.2.86.502.g8cd7fb22"
