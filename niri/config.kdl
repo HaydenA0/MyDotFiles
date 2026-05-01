@@ -242,7 +242,8 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-sh-at-startup "vicinae server"
-spawn-sh-at-startup "swaybg -i /home/anasr/wallpaper/sailormoon.png -m fill"
+// set wallpaper
+spawn-sh-at-startup "swaybg -i /home/anasr/wallpaper/horse.png -m fill"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -360,7 +361,7 @@ binds {
     Mod+B { spawn-sh "pgrep -x waybar > /dev/null && killall waybar || waybar &"; }
     Mod+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Mod+Q { spawn-sh "playerctl -p spotify play-pause"; }
-    Mod+Shift+Right { spawn-sh "playerctl -p spotify next"; }
+    Mod+Shift+Right { spawn-sh "playerctl -p spotify  next"; }
     Mod+Shift+Left { spawn-sh "playerctl -p spotify previous"; }
     Mod+Shift+P { spawn-sh "/home/anasr/.config/scripts/dumb-screenshot.sh"; }
     Mod+Shift+S { spawn-sh "/home/anasr/.config/scripts/screenshot.sh"; }

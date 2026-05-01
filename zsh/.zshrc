@@ -94,6 +94,7 @@ alias latex_compile="pdflatex -interaction=nonstopmode -halt-on-error -output-di
 
 alias night="gammastep -O 3000"
 alias pdf='zen-browser "$(fd . -e pdf | fzf)"'
+alias fonts="fc-list : family"
 
 
 
