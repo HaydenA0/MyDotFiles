@@ -1,15 +1,17 @@
 return {
-	-- Using Lazy
+
 	{
-		"navarasu/onedark.nvim",
-		priority = 1000, -- make sure to load this before all the other start plugins
+		"vague-theme/vague.nvim",
 		config = function()
-			require("onedark").setup({
-				style = "darker",
+			vim.cmd.colorscheme("vague")
+			require("vague").setup({
+				transparent = true,
+				bold = true,
+				italic = false,
 			})
-			require("onedark").load()
 		end,
 	},
+
 	{
 		"xiyaowong/transparent.nvim",
 	},

@@ -16,6 +16,7 @@ export ZDOTDIR="$HOME/.config/zsh"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=/home/anasr/.opencode/bin:$PATH
 export BROWSER=zen-browser
+export OLLAMA_PLACEHOLDER=ollama
 
 
 
@@ -158,6 +159,9 @@ fi
 
 
 
+chpwd() {
+  ls
+}
 
 
 

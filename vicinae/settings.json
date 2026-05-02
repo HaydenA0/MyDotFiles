@@ -10,9 +10,20 @@
 
 {
    "$schema": "https://vicinae.com/schemas/config.json",
+   "font": {
+      "rendering": "native",
+      "normal": {
+         "family": "SF Pro Text",
+         "size": 12
+      }
+   },
    "theme": {
       "dark": {
-         "name": "zenwritten-dark"
+         "name": "zenwritten-dark",
+         "icon_theme": "macOS"
       }
+   },
+   "launcher_window": {
+      "opacity": 0.7
    }
 }

@@ -14,6 +14,7 @@ keymap("n", "<A-Down>", ":resize -5<CR>", { noremap = true, desc = "Decrease win
 keymap("n", "<A-Left>", ":vertical resize -5<CR>", { noremap = true, desc = "Decrease window width" })
 keymap("n", "<A-Right>", ":vertical resize +5<CR>", { noremap = true, desc = "Increase window width" })
 keymap("n", "<A-Tab>", "<C-w>w", { noremap = true, desc = "Switch to next window" })
+
 keymap("n", "<C-q><leader>", "<cmd>copen<CR>", { desc = "Open the quick fix list" })
 keymap("n", "<C-q>j", "<cmd>cnext<CR>", { desc = "Open the quick fix list" })
 keymap("n", "<C-q>k", "<cmd>cprevious<CR>", { desc = "Open the quick fix list" })
