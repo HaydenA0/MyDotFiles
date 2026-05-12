@@ -356,7 +356,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open a Terminal: Foot" { spawn "foot"; }
-    Mod+T { spawn-sh "kitty"; }
+    Mod+T { spawn-sh "foot"; }
     Mod+D hotkey-overlay-title="Run an Application: Viciane" { spawn-sh "vicinae toggle"; }
     Mod+B { spawn-sh "pgrep -x waybar > /dev/null && killall waybar || waybar &"; }
     Mod+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }

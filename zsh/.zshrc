@@ -84,7 +84,7 @@ alias cd='z'
 alias a="ff"
 
 
-alias ls='eza -lF --icons --group-directories-first'
+alias ls='eza -F --icons --group-directories-first'
 alias lsa="eza -lh --total-size"
 alias cat="bat"
 alias rf="rm -rf ~/.cache/fastfetch/"
@@ -151,19 +151,6 @@ ta() {
   fi
 }
 
-csize() {
-    if [ -z "$1" ]; then
-        echo "usage: size <file|directory>"
-        return 1
-    fi
-
-    if [ ! -e "$1" ]; then
-        echo "Error: '$1' does not exist"
-        return 1
-    fi
-
-    du -sh -- "$1" 2>/dev/null | awk '{print $1}'
-}
 
 
 if [ -z "$TMUX" ]; then
