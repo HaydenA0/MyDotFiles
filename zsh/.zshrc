@@ -151,6 +151,20 @@ ta() {
   fi
 }
 
+csize() {
+    if [ -z "$1" ]; then
+        echo "usage: size <file|directory>"
+        return 1
+    fi
+
+    if [ ! -e "$1" ]; then
+        echo "Error: '$1' does not exist"
+        return 1
+    fi
+
+    du -sh -- "$1" 2>/dev/null | awk '{print $1}'
+}
+
 
 if [ -z "$TMUX" ]; then
   tmux attach || tmux
@@ -163,5 +177,9 @@ chpwd() {
   ls
 }
 
+
+
+
+export PATH=$PATH:/home/anasr/.spicetify
 
 
