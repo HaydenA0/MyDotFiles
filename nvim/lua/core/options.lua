@@ -16,7 +16,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.cmdheight = 0
-vim.opt.guicursor = ""
+-- vim.opt.guicursor = ""
 vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		local bufnr = vim.api.nvim_get_current_buf()
