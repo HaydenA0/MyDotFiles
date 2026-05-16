@@ -15,7 +15,7 @@ bindkey '^E' edit-command-line
 export ZDOTDIR="$HOME/.config/zsh"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=/home/anasr/.opencode/bin:$PATH
-export BROWSER=zen-browser
+export BROWSER=brave-browser
 export OLLAMA_PLACEHOLDER=ollama
 
 
@@ -168,5 +168,4 @@ chpwd() {
 
 
 export PATH=$PATH:/home/anasr/.spicetify
-
-
+export PATH="$HOME/.cargo/bin:$PATH"
