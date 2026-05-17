@@ -329,6 +329,13 @@ window-rule {
 	opacity 0.85
 }
 
+window-rule {
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
+    // open-maximized-to-edges true
+}
+
+
 
 gestures {
     // ... other settings

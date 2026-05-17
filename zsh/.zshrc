@@ -169,3 +169,6 @@ chpwd() {
 
 export PATH=$PATH:/home/anasr/.spicetify
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH=/home/anasr/.local/xonsh-env/xbin:$PATH
+
+source /home/anasr/.config/broot/launcher/bash/br

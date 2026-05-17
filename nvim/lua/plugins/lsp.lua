@@ -31,6 +31,14 @@ return {
 		})
 
 		vim.lsp.enable(to_install)
+		vim.lsp.config.gdshader_lsp = {
+			cmd = { "/usr/local/bin/gdshader-lsp" },
+			filetypes = { "gdshader" },
+			root_markers = { ".git" },
+			capabilities = vim.lsp.protocol.make_client_capabilities(),
+		}
+
+		vim.lsp.enable("gdshader_lsp")
 
 		if vim.fn.filereadable("project.godot") == 1 then
 			vim.fn.serverstart("./godot.pipe")
