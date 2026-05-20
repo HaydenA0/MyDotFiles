@@ -7,9 +7,19 @@ return {
 	config = function()
 		require("mason").setup()
 
-		local to_install = { "lua_ls", "clangd", "ty", "gopls", "rust_analyzer", "gdscript" }
+		local to_install = { "lua_ls", "clangd", "pyright", "gopls", "rust_analyzer", "gdscript", "glsl_analyzer" }
 		local keymap = vim.keymap.set
+
 		keymap("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
+
+		vim.api.nvim_create_autocmd("LspAttach", {
+			callback = function(args)
+				local opts = { buffer = args.buf }
+				keymap("n", "gd", vim.lsp.buf.definition, { buffer = args.buf, desc = "LSP Definition" })
+				keymap("n", "gD", vim.lsp.buf.declaration, { buffer = args.buf, desc = "LSP Declaration" })
+				keymap("n", "gi", vim.lsp.buf.implementation, { buffer = args.buf, desc = "LSP Implementation" })
+			end,
+		})
 
 		require("mason-lspconfig").setup({
 			ensure_installed = vim.tbl_filter(function(v)
@@ -19,11 +29,8 @@ return {
 
 		vim.lsp.config("gdscript", {
 			cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
-			filetypes = { "gd", "gdscript", "gdscript3" },
+			filetypes = { "gd", "gdscript", "gdscript3", "gdshader" },
 			root_markers = { "project.godot", ".git" },
-			flags = {
-				debounce_text_changes = 150,
-			},
 		})
 
 		vim.lsp.config("lua_ls", {
@@ -31,13 +38,6 @@ return {
 		})
 
 		vim.lsp.enable(to_install)
-		vim.lsp.config.gdshader_lsp = {
-			cmd = { "/usr/local/bin/gdshader-lsp" },
-			filetypes = { "gdshader" },
-			root_markers = { ".git" },
-			capabilities = vim.lsp.protocol.make_client_capabilities(),
-		}
-
 		vim.lsp.enable("gdshader_lsp")
 
 		if vim.fn.filereadable("project.godot") == 1 then

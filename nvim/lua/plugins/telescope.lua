@@ -42,7 +42,7 @@ return {
 		local keymap = vim.keymap.set
 
 		keymap("n", "<C-p>", function()
-			local ok = pcall(require("telescope.builtin").git_files)
+			local ok = pcall(require("telescope.builtin").find_files)
 			if not ok then
 				require("telescope.builtin").find_files()
 			end

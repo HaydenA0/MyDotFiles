@@ -96,6 +96,7 @@ alias latex_compile="pdflatex -interaction=nonstopmode -halt-on-error -output-di
 alias night="gammastep -O 3000"
 alias pdf='zen-browser "$(fd . -e pdf | fzf)"'
 alias fonts="fc-list : family"
+alias disco="discord --enable-features=UseOzonePlatform --ozone-platform=wayland"
 
 
 
@@ -172,3 +173,4 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=/home/anasr/.local/xonsh-env/xbin:$PATH
 
 source /home/anasr/.config/broot/launcher/bash/br
+

@@ -10,6 +10,9 @@ return {
 				winbar = "%#OilDir# %{v:lua.require('oil').get_current_dir()}",
 			},
 			keymaps = {
+
+				["<C-p>"] = false,
+
 				["<M-h>"] = "actions.parent",
 				["<M-l>"] = "actions.select",
 				["!"] = {
@@ -18,9 +21,8 @@ return {
 						local dir = require("oil").get_current_dir()
 						vim.ui.input({ prompt = "Shell Command: " }, function(input)
 							if input and input ~= "" then
-								-- Run command synchronously
 								vim.fn.system(string.format("cd %s && %s", vim.fn.shellescape(dir), input))
-								-- Force refresh by re-editing the buffer
+
 								vim.cmd("edit")
 								print("Command executed and Oil refreshed")
 							end
@@ -30,5 +32,6 @@ return {
 			},
 			view_options = { show_hidden = true },
 		})
+		vim.keymap.set("n", "<leader>-", "<CMD>Oil --float<CR>", { desc = "Open Oil in float" })
 	end,
 }
