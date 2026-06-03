@@ -5,12 +5,18 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 	},
 	config = function()
+		vim.filetype.add({
+			extension = {
+				hlsl = "hlsl",
+			},
+		})
+
 		require("mason").setup()
 
-		local to_install = { "lua_ls", "clangd", "pyright", "gopls", "rust_analyzer", "gdscript", "glsl_analyzer" }
+		local to_install = { "lua_ls", "clangd", "pyright", "gopls", "rust_analyzer", "gdscript" }
 		local keymap = vim.keymap.set
 
-		keymap("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
+		keymap({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
 
 		vim.api.nvim_create_autocmd("LspAttach", {
 			callback = function(args)
@@ -18,6 +24,13 @@ return {
 				keymap("n", "gd", vim.lsp.buf.definition, { buffer = args.buf, desc = "LSP Definition" })
 				keymap("n", "gD", vim.lsp.buf.declaration, { buffer = args.buf, desc = "LSP Declaration" })
 				keymap("n", "gi", vim.lsp.buf.implementation, { buffer = args.buf, desc = "LSP Implementation" })
+				keymap("n", "grn", function()
+					vim.lsp.buf.rename()
+					-- Wait briefly for the LSP to apply changes, then write all modified buffers
+					vim.defer_fn(function()
+						vim.cmd("silent! wa")
+					end, 100)
+				end, { buffer = args.buf, desc = "LSP Rename & Save All" })
 			end,
 		})
 
@@ -38,10 +51,12 @@ return {
 		})
 
 		vim.lsp.enable(to_install)
-		vim.lsp.enable("gdshader_lsp")
+		-- vim.lsp.enable("gdshader_lsp")
+		vim.lsp.enable("glasgow")
+		vim.lsp.enable("slangd")
 
-		if vim.fn.filereadable("project.godot") == 1 then
-			vim.fn.serverstart("./godot.pipe")
-		end
+		-- if vim.fn.filereadable("project.godot") == 1 then
+		-- 	vim.fn.serverstart("./godot.pipe")
+		-- end
 	end,
 }

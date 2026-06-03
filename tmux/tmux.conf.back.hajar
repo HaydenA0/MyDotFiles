@@ -1,0 +1,64 @@
+# Support 256 colors and TrueColor
+set -g default-terminal "xterm-256color"
+set -ga terminal-overrides ",xterm-256color:Tc"
+
+set -g mouse on               # Enable mouse mode
+set -g history-limit 10000     # Increase history limit
+set -s escape-time 0          # Fix escape time for Vim
+set -g status-position top    # Move status bar to top
+set-option -g allow-rename off # Disable auto-renaming windows
+
+# Start windows and panes at 1 
+set -g base-index 1
+setw -g pane-base-index 1
+
+# Remap prefix from 'C-b' to 'C-f'
+unbind C-b
+set-option -g prefix C-f
+bind-key C-f send-prefix
+
+# Reload config with 'r'
+unbind r 
+bind r source-file ~/.tmux.conf \; display "Reloaded!"
+
+# Split panes using ! and @
+unbind '"'
+unbind %
+bind ! split-window -h -c "#{pane_current_path}"
+bind @ split-window -v -c "#{pane_current_path}"
+
+# Switch panes using Alt-arrow without prefix
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# dracula settings
+
+# Transparency settings
+set -g status-style bg=terminal
+set -g @dracula-status-bg default
+set -g @dracula-transparent-powerline-bg true
+
+# Dracula Plugin Options
+set -g @dracula-show-powerline false
+set -g @dracula-plugins "git"
+
+# Git settings
+set -g @dracula-git-disable-status true    # Only show branch name
+set -g @dracula-git-show-current-symbol ✓
+set -g @dracula-git-show-diff-symbol !  
+set -g @dracula-git-colors "white dark_gray"
+
+# Window Status / Colors
+set -g @dracula-window-status-current-bg "#8be9fd" # Cyan active window
+set -g @dracula-window-status-current-fg "#282a36" # Dark text for contrast
+
+# plugings
+
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'dracula/tmux'      
+
+# Initialize TMUX plugin manager
+run '~/.tmux/plugins/tpm/tpm'

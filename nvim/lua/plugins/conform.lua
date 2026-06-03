@@ -6,18 +6,19 @@ return {
 			python = { "ruff_format" },
 			c = { "clang-format" },
 			cpp = { "clang-format" },
+			cu = { "clang-format" },
 			rust = { "rustfmt" },
 			go = { "gofmt" },
 		},
+		formatters = {
+			clang_format = {
+
+				prepend_args = { "-assume-filename", "file.cpp" },
+			},
+		},
+		format_on_save = {
+			timeout_ms = 500,
+			lsp_format = "fallback",
+		},
 	},
-	config = function(_, opts)
-		local conform = require("conform")
-		conform.setup(opts)
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			pattern = "*",
-			callback = function()
-				conform.format({ async = false })
-			end,
-		})
-	end,
 }

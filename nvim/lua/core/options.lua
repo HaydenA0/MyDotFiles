@@ -11,12 +11,17 @@ vim.opt.tabstop = 8
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
+
 vim.diagnostic.config({ virtual_text = true, severity_sort = true, signs = true, underline = true })
+vim.lsp.inlay_hint.enable(true, { bufnr = 0 })
+
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.cmdheight = 0
 -- vim.opt.guicursor = ""
+vim.opt.undofile = true -- BIG ONE solves a lot of my problems
+
 vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		local bufnr = vim.api.nvim_get_current_buf()
@@ -25,6 +30,15 @@ vim.api.nvim_create_autocmd("FileType", {
 		if lang then
 			-- Start treesitter; pcall prevents errors on unsupported files
 			pcall(vim.treesitter.start, bufnr, lang)
+		end
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "FocusLost" }, {
+	callback = function()
+		-- Only save if the buffer is modifiable and has a file name
+		if vim.bo.modified and not vim.bo.readonly and vim.fn.expand("%") ~= "" then
+			vim.cmd("silent! update")
 		end
 	end,
 })

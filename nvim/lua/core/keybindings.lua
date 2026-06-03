@@ -34,3 +34,11 @@ vim.keymap.set("n", "<leader>i", function()
 	vim.cmd("vsplit " .. scope_file)
 	vim.cmd("setlocal wrap linebreak")
 end, { desc = "Open Project Scope" })
+
+vim.keymap.set("n", "<leader>th", function()
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
+end, { desc = "[T]oggle Inlay [H]ints" })
+
+-- keymap("n", "<CR>", "van", { remap = true, desc = "Incremental Selection: Init" })
+-- keymap("x", "<CR>", "an", { remap = true, desc = "Incremental Selection: Expand" })
+-- keymap("x", "<BS>", "in", { remap = true, desc = "Incremental Selection: Shrink" })

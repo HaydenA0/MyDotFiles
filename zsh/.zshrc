@@ -7,7 +7,9 @@ zle -N edit-command-line
 VISUAL=nvim
 bindkey '^E' edit-command-line
 
+
 [[ -o interactive ]] || return
+
 
 
 
@@ -21,9 +23,17 @@ export OLLAMA_PLACEHOLDER=ollama
 
 
 
+
 HISTFILE=~/.config/zsh/.zsh_history
 HISTSIZE=200000
 SAVEHIST=200000
+
+
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_FIND_NO_DUPS
+
+
 setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
@@ -33,15 +43,24 @@ setopt HIST_IGNORE_SPACE
 
 
 
-zstyle ':completion:*' menu select
+
+
+
+zstyle ':completion:*' menu no
 zstyle ':completion:*' auto-description 'format'
+
 
 if autoload -Uz compinit 2>/dev/null; then
     compinit
 fi
 
 
-
+if [[ -f ~/.zsh/fzf-tab/fzf-tab.plugin.zsh ]]; then
+    source ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
+else
+    echo "Warning: fzf-tab not found at ~/.zsh/fzf-tab/. Run:"
+    echo "git clone https://github.com/Aloxaf/fzf-tab ~/.zsh/fzf-tab"
+fi
 
 
 if [[ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
@@ -56,15 +75,20 @@ if [[ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
 fi
 
 
-bindkey '^I' expand-or-complete
+
+
+
 bindkey '\e^I' autosuggest-accept
 
 
 
 
-eval "$(starship init zsh)"
-# (cat ~/.cache/wal/sequences &)
+
 eval "$(zoxide init zsh)"
+
+if command -v fzf &> /dev/null; then
+  eval "$(fzf --zsh)"
+fi
 
 
 
@@ -79,16 +103,12 @@ alias audioctl="pavucontrol"
 alias rw="sudo systemctl restart iwd"
 alias chat="llm -m gemini-2.5-flash-lite"
 
-
 alias cd='z'
 alias a="ff"
 
-
 alias ls='eza -F --icons --group-directories-first'
 alias lsa="eza -lh --total-size"
-alias cat="bat"
 alias rf="rm -rf ~/.cache/fastfetch/"
-
 
 alias ae="auto_env"
 alias latex_compile="pdflatex -interaction=nonstopmode -halt-on-error -output-directory=build"
@@ -100,19 +120,133 @@ alias disco="discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 
 
 
+function battery() {
+  BATTERY_PERCENT=$(cat /sys/class/power_supply/BAT1/capacity)
+  BATTERY_STATUS=$(cat /sys/class/power_supply/BAT1/status)
 
-
-
-function define() {
-  notify-send -t 0 "$(python ~/dev/projects/definition/main.py "$1")"
+  echo "Battery Status: $BATTERY_STATUS"
+  echo "Battery Percent: $BATTERY_PERCENT %"
 }
 
+
+function new_cargo() {
+  if ! command -v cargo &> /dev/null; then
+    echo "Error: cargo is not installed" >&2
+    return 1
+  fi
+
+  if [ -d "$1" ]; then
+    echo "Error: Directory '$1' already exists" >&2
+    return 1
+  fi
+
+  cargo new "$1" && cd "$1" && rm -rf .git && git init -b main
+
+}
+
+function new_uv() {
+  if ! command -v uv &> /dev/null; then
+    echo "Error: uv is not installed" >&2
+    return 1
+  fi
+
+  if [ -z "$1" ]; then
+    echo "Usage: new_uv <project_name>" >&2
+    return 1
+  fi
+
+  if [ -d "$1" ]; then
+    echo "Error: Directory '$1' already exists" >&2
+    return 1
+  fi
+
+
+  uv init "$1" && cd "$1" || return 1
+
+
+  uv venv
+
+
+  cat <<'EOF' > pyrightconfig.json
+{
+  "venvPath": ".",
+  "venv": ".venv"
+}
+EOF
+
+
+  rm -rf .git
+  git init -b main
+  git add .
+  git commit -m "init"
+}
+
+function new_go() {
+  if ! command -v go &> /dev/null; then
+    echo "Error: go is not installed" >&2
+    return 1
+  fi
+
+  if [ -z "$1" ]; then
+    echo "Usage: new_go <project_name>" >&2
+    return 1
+  fi
+
+  if [ -d "$1" ]; then
+    echo "Error: Directory '$1' already exists" >&2
+    return 1
+  fi
+
+
+  mkdir -p "$1" && cd "$1" || return 1
+
+
+  go mod init "$1"
+
+
+  cat <<'EOF' > main.go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("Hello, World!")
+}
+EOF
+
+
+  rm -rf .git
+  git init -b main
+  git add .
+  git commit -m "init"
+}
+
+
+function cpex()
+{
+    if (( $# == 0 )); then
+      echo "Usage: cptype <ext1> [ext2] ..."
+      return 1
+    fi
+
+    local fd_args=()
+    for ext; do
+        fd_args+=(-e "$ext")
+    done
+
+    fd "${fd_args[@]}" -0 | while IFS= read -r -d '' file; do
+        echo "// $file"
+        cat "$file"
+        echo ""
+    done | wl-copy
+}
 
 function mkvenv() {
   uv venv
   source .venv/bin/activate
   echo "Venv Created"
 }
+
 auto_env() {
   if [[ -n "$VIRTUAL_ENV" && ! -d ".venv" ]]; then
     deactivate
@@ -124,14 +258,9 @@ auto_env() {
   fi
 }
 
-
 ff() {
   z $(fd . -t d | fzf)
 }
-
-
-
-
 
 tn() {
   echo -n "Enter the name of the session > "
@@ -143,7 +272,6 @@ tn() {
   fi
 }
 
-
 ta() {
   local session
   session=$(tmux ls 2>/dev/null | fzf | awk -F: '{print $1}')
@@ -151,6 +279,12 @@ ta() {
     tmux attach -t "$session"
   fi
 }
+
+chpwd() {
+  ls
+}
+
+
 
 
 
@@ -161,12 +295,6 @@ fi
 
 
 
-chpwd() {
-  ls
-}
-
-
-
 
 export PATH=$PATH:/home/anasr/.spicetify
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -174,3 +302,44 @@ export PATH=/home/anasr/.local/xonsh-env/xbin:$PATH
 
 source /home/anasr/.config/broot/launcher/bash/br
 
+if [ -f "$HOME/.config/zsh/.zsh_secrets" ]; then
+    source "$HOME/.config/zsh/.zsh_secrets"
+fi
+
+
+
+
+#
+
+
+
+
+export AI_CMD_PROVIDER='openai'
+
+
+export AI_CMD_OPENAI_URL='https://api.groq.com/openai/v1/chat/completions'
+
+
+export AI_CMD_OPENAI_MODEL='llama-3.3-70b-versatile'
+
+
+if [[ -f ~/.config/zsh/.zsh-ai/ai-cmd.plugin.zsh ]]; then
+    source ~/.config/zsh/.zsh-ai/ai-cmd.plugin.zsh
+fi
+
+
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+
+
+
+
+source "$ZDOTDIR/powerlevel10k/powerlevel10k.zsh-theme"
+
+
+[[ ! -f "$ZDOTDIR/.p10k.zsh" ]] || source "$ZDOTDIR/.p10k.zsh"
+export CAPACITOR_ANDROID_STUDIO_PATH="/usr/bin/android-studio"
+
+export EDITOR="nvim"

@@ -2,8 +2,9 @@
 !.gitignore
 
 !/kitty/
-!/niri/
+!/sway/
 !/nvim/
 !/zsh/
 /zsh/.zsh_secrets
 !/scripts/
+!/tmux/

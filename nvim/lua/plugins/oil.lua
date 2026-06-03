@@ -9,10 +9,12 @@ return {
 			win_options = {
 				winbar = "%#OilDir# %{v:lua.require('oil').get_current_dir()}",
 			},
+			-- Automatically save buffers updated with LSP willRenameFiles (e.g. updating imports)
+			lsp_file_methods = {
+				autosave_changes = "unmodified", -- Or true to save regardless of status
+			},
 			keymaps = {
-
 				["<C-p>"] = false,
-
 				["<M-h>"] = "actions.parent",
 				["<M-l>"] = "actions.select",
 				["!"] = {
@@ -22,7 +24,6 @@ return {
 						vim.ui.input({ prompt = "Shell Command: " }, function(input)
 							if input and input ~= "" then
 								vim.fn.system(string.format("cd %s && %s", vim.fn.shellescape(dir), input))
-
 								vim.cmd("edit")
 								print("Command executed and Oil refreshed")
 							end
