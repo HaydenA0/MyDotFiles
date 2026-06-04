@@ -1,5 +1,4 @@
 acpi
-alacritty
 alsa-utils
 awww
 base
@@ -21,18 +20,15 @@ cuda
 directx-shader-compiler
 discord
 dkms
-doxygen
 efibootmgr
 eza
 fastfetch
 fd
 feh
-foot
 fuzzel
 fzf
 gammastep
 gdb
-ghostty
 git
 gnuplot
 go
@@ -67,7 +63,6 @@ mako
 mesa-utils
 meson
 mpv
-nano
 neovim
 noto-fonts
 noto-fonts-cjk
@@ -87,7 +82,6 @@ pipewire-jack
 pipewire-pulse
 power-profiles-daemon
 python-pip
-python-pipx
 python-pyqt5
 python-pyqt6
 python-ruff
@@ -105,7 +99,6 @@ rust-analyzer
 rust-wasm
 rustup
 sbctl
-scdoc
 sdl2_mixer
 sdl2_net
 sdl2_ttf
@@ -136,7 +129,6 @@ ttf-liberation
 ttf-sourcecodepro-nerd
 uv
 valgrind
-vifm
 vim
 vulkan-intel
 waybar
@@ -155,7 +147,6 @@ yamllint
 yazi
 yq
 zathura-pdf-mupdf
-zed
 zoxide
 zram-generator
 zsh
