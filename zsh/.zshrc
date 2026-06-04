@@ -140,7 +140,7 @@ function new_cargo() {
     return 1
   fi
 
-  cargo new "$1" && cd "$1" && rm -rf .git && git init -b main
+  cargo new "$1" && cd "$1" && rm -rf .git && git init -b main && git add . && git commit -m "init"
 
 }
 

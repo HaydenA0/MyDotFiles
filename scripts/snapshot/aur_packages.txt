@@ -1,0 +1,14 @@
+android-studio
+cloudflare-warp-bin
+envycontrol
+shader-slang-bin
+smem
+spotify
+tree-sitter-go
+ttf-arabeyes-fonts
+ttf-iosevka
+ttf-iosevka-lyte-nerd-font
+ttf-joypixels
+ttf-lilex
+vicinae
+visual-studio-code-bin

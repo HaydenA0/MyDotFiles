@@ -1,0 +1,5 @@
+[opener]
+open = [
+    { run = 'swayimg "$1"', desc = "Image", for = "linux", mime = "image/*" },
+    { run = 'zathura "$1"', desc = "PDF", for = "linux", mime = "pdf/*" }
+]
