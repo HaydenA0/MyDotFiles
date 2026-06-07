@@ -15,7 +15,7 @@ SELECTED=$(fd . "$WALLPAPER_DIR" | vicinae dmenu)
 
 
 if [ -n "$SELECTED" ]; then
-    FULL_PATH="$WALLPAPER_DIR/$SELECTED"
+    FULL_PATH="$SELECTED"
     echo "Selected: $FULL_PATH"
     
     awww img "$FULL_PATH" 

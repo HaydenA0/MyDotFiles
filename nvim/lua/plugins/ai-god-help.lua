@@ -11,13 +11,3 @@ return {
 		})
 	end,
 }
-
--- add this to the file where you setup your other plugins:
--- return {
--- 	"monkoose/neocodeium",
--- 	config = function()
--- 		local neocodeium = require("neocodeium")
--- 		neocodeium.setup()
--- 		vim.keymap.set("i", "<A-Tab>", neocodeium.accept)
--- 	end,
--- }

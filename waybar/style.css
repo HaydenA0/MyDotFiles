@@ -1,58 +1,52 @@
-@import "/home/anasr/.cache/wal/colors-waybar.css";
-
 * {
     border: none;
-    font-size: 18px;
-    font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF" ;
+    font-size: 15px;
+    font-family: "Iosevka";
     font-weight: bold;
-    min-height: 24px;
-    /* Set default text color to the theme foreground */
+    min-width: 24px; 
+    min-height: 0px; 
     color: @foreground;
 }
 
 window#waybar {
-  background: transparent;
-  margin: 3px;
- }
-
-#custom-logo {
-  padding: 0 10px;
-  color: @color4; /* Optional: Make logo an accent color */
+  background-color: #000000; /* Solid black bar background */
+  margin: 0px;               /* Sits completely flush with the screen edge */
 }
 
+#custom-logo {
+  padding: 10px 0;
+  color: @color4; 
+}
+
+/* Modules now blend cleanly into the solid black background */
 .modules-right {
-  padding-left: 5px;
-  border-radius: 15px 0 0 15px;
-  margin-top: 2px;
-  background: @background; /* Replaced #000000 */
+  padding: 8px 0;
+  margin-bottom: 2px;
+  background: transparent; 
 }
 
 .modules-center {
-  margin-top: 3px;
+  margin: 3px 0;
   background: transparent;
   padding: 0;
-  border-radius: 0;
 }
 
 #custom-spotify {
-  background: @background; 
+  background: transparent; 
   color: @foreground;     
-  padding: 5px 15px;     
-  border-radius: 15px;
-  margin-left: 10px;      
+  padding: 12px 4px;
+  margin-bottom: 10px;      
 }
 
-/* 3. Style the image (outside the blob) */
 #image-album-art {
   padding: 0px;
-  margin-top: 0px;
-  border-radius: 0px;
+  margin: 0px;
 }
 
 .modules-left {
-  border-radius: 0 15px 15px 0;
   margin-top: 2px;
-  background: @background; /* Replaced #000000 */
+  padding: 8px 0;
+  background: transparent; 
 }
 
 #battery,
@@ -74,26 +68,26 @@ window#waybar {
 #window,
 #workspaces,
 #clock {
-  padding: 0 5px;
+  padding: 6px 0; 
 }
 
-#clock{
+#clock {
   color: @color4;
 }
 
 #battery.charging {
-    color: @background;       /* Replaced #ffffff */
-    background-color: @color2; /* Replaced #26A65B (Green) with theme accent */
+    color: @background;       
+    background-color: @color2; 
 }
 
 #battery.warning:not(.charging) {
-    background-color: @color3; /* Replaced #ffbe61 (Orange) */
+    background-color: @color3; 
     color: @background;
 }
 
 #battery.critical:not(.charging) {
-    background-color: @color1; /* Replaced #f53c3c (Red) */
-    color: @foreground;        /* Replaced #ffffff */
+    background-color: @color1; 
+    color: @foreground;        
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -103,7 +97,7 @@ window#waybar {
 
 @keyframes blink {
     to {
-        background-color: @foreground; /* Replaced #ffffff */
-        color: @background;            /* Replaced #000000 */
+        background-color: @foreground; 
+        color: @background;            
     }
 }

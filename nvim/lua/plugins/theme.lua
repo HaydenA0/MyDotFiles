@@ -1,16 +1,33 @@
 return {
+
+	--
 	{
-		"navarasu/onedark.nvim",
-		priority = 1000,
+		"rose-pine/neovim",
+		name = "rose-pine",
 		config = function()
-			require("onedark").setup({
-				style = "darker",
-				transparent = true,
+			vim.cmd("colorscheme rose-pine")
+			require("rose-pine").setup({
+				variant = "moon",
+				dark_variant = "moon",
+				dim_inactive_windows = false,
+				extend_background_behind_borders = true,
+
+				enable = {
+					terminal = true,
+					legacy_highlights = true,
+					migrations = true,
+				},
+
+				styles = {
+					bold = true,
+					italic = false,
+					transparency = true,
+				},
 			})
-			require("onedark").load()
+
+			vim.cmd("colorscheme rose-pine")
 		end,
 	},
-
 	{
 		"xiyaowong/transparent.nvim",
 	},

@@ -1,6 +1,7 @@
 {
     "layer": "top",
-    "position": "top",
+    "position": "right",
+    "width": 36,
     "reload_style_on_change": true,
     "modules-left": [
         "network",
@@ -17,15 +18,18 @@
     ],
     "clock": {
         "format": "/ {:%I:%M %p}",
-        "interval": 1
+        "interval": 1,
+        "rotate": 270
     },
     "disk": {
         "interval": 30,
-        "format": "DISk : {percentage_used}%",
-        "path": "/"
+        "format": "DISK : {percentage_used}%",
+        "path": "/",
+        "rotate": 270
     },
     "memory": {
-        "format": "/ MEM : {percentage}%"
+        "format": "/ MEM : {percentage}%",
+        "rotate": 270
     },
     "network": {
         "format-wifi": "  ",
@@ -34,6 +38,7 @@
         "tooltip-format": "{ipaddr}",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
         "tooltip-format-ethernet": "{ifname} 🖧 | {ipaddr}"
+
     },
     "battery": {
         "interval": 1,
@@ -53,17 +58,19 @@
             "󰂀",
             "󰂂",
             "󰁹"
-        ]
+        ],
+        "rotate": 270
     },
-      "image#album-art": {
+    "image#album-art": {
         "path": "/tmp/spotify_cover.jpg",
-        "size": 32,
+        "size": 24,
         "interval": 1,
         "on-click": "~/.config/waybar/album_art.sh"
     },
-  "custom/spotify": {
+    "custom/spotify": {
         "exec": "$HOME/.config/waybar/spotify.sh", 
         "format": "  {}   ",
-        "interval": 1
+        "interval": 1,
+        "rotate": 270
     }
 }

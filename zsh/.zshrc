@@ -114,7 +114,7 @@ alias ae="auto_env"
 alias latex_compile="pdflatex -interaction=nonstopmode -halt-on-error -output-directory=build"
 
 alias night="gammastep -O 3000"
-alias pdf='zen-browser "$(fd . -e pdf | fzf)"'
+alias pdf='brave-browser "$(fd . -e pdf | fzf)"'
 alias fonts="fc-list : family"
 alias disco="discord --enable-features=UseOzonePlatform --ozone-platform=wayland"
 
@@ -339,7 +339,97 @@ fi
 source "$ZDOTDIR/powerlevel10k/powerlevel10k.zsh-theme"
 
 
-[[ ! -f "$ZDOTDIR/.p10k.zsh" ]] || source "$ZDOTDIR/.p10k.zsh"
-export CAPACITOR_ANDROID_STUDIO_PATH="/usr/bin/android-studio"
 
 export EDITOR="nvim"
+
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+
+
+function download() 
+{
+  local link=$1
+  local file=$2
+
+  if [[ -z $link || -z $file ]]; then
+    echo "Usage: download <link> <file_name>" >&2
+    return 1
+  fi
+
+  wget -c "$link" -O "$file"
+}
+
+function smart_download() 
+{
+  local link=$1
+  local file=$2
+
+  if [[ -z $link || -z $file ]]; then
+    echo "Usage: smart_download <link> <file_name>" >&2
+    return 1
+  fi
+
+  curl --fail -C - --speed-limit 1 --speed-time 10 --retry 5 --retry-delay 2 -o "$file" "$link"
+}
+
+
+function hard_cp() 
+{
+  local src="${1%/}"
+  local dst="${2%/}"
+
+  if [[ -z $src || -z $dst ]]; then
+    echo "Usage: hard_cp <source> <destination_dir>" >&2
+    return 1
+  fi
+
+  if [[ ! -d $dst ]]; then
+    echo "Error: destination must be an existing directory" >&2
+    return 1
+  fi
+
+  rsync -ah --progress "$src" "$dst"
+
+  echo "Flushing write cache to device... (Please wait, this may take some time)"
+  sync 
+
+  local dst_path="$dst/$(basename "$src")"
+
+  local hash_tool="md5sum"
+  if command -v xxhsum &>/dev/null; then
+    hash_tool="xxhsum"
+  elif command -v xxsum &>/dev/null; then
+    hash_tool="xxsum"
+  elif command -v sha1sum &>/dev/null; then
+    hash_tool="sha1sum"
+  fi
+
+  echo "Verifying file integrity using $hash_tool..."
+
+  if [[ -f $src ]]; then
+    local src_hash=$($hash_tool "$src" | cut -d' ' -f1)
+    local dst_hash
+
+    if ! dst_hash=$(dd if="$dst_path" iflag=direct 2>/dev/null | $hash_tool | cut -d' ' -f1); then
+      dst_hash=$($hash_tool "$dst_path" | cut -d' ' -f1)
+    fi
+
+    if [[ $src_hash == $dst_hash ]]; then
+      echo "Verification passed. Safe to unplug."
+    else
+      echo "Verification failed! Data corruption detected." >&2
+      return 1
+    fi
+
+  elif [[ -d $src ]]; then
+    local src_hash=$(cd "$src" && find . -type f -exec "$hash_tool" {} + 2>/dev/null | sort | "$hash_tool" | cut -d' ' -f1)
+    local dst_hash=$(cd "$dst_path" && find . -type f -exec "$hash_tool" {} + 2>/dev/null | sort | "$hash_tool" | cut -d' ' -f1)
+
+    if [[ $src_hash == $dst_hash ]]; then
+      echo "Verification passed. Safe to unplug."
+    else
+      echo "Verification failed! Data corruption detected." >&2
+      return 1
+    fi
+  fi
+}

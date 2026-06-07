@@ -21,6 +21,7 @@ set $menu "vicinae toggle"
 
 exec "vicinae server"
 exec "awww-daemon"
+exec "waybar"
 
 ### Output configuration
 #
@@ -229,14 +230,14 @@ bindsym $mod+r mode "resize"
 
 ### Window Customization (Title bars and borders)
 # Configure a custom font for the title bars (optional)
-font pango:Iosevka ExtraBold 12
+font pango:Iosevka ExtraBold 14
 
 # Change the title bar colors (swapping the default blue for dark gray)
 # class                 border  backgr. text    indicator child_border
-client.focused          #000000 #5E8A8A #ffffff #222233   #222233
-client.focused_inactive #000000 #000000 #ffffff #222233   #222233
-client.unfocused        #000000 #000000 #ffffff #222233   #222233
-client.urgent           #000000 #000000 #ffffff #222233   #222233
+client.focused          #000000 #bbbbbb #333333 #222233   #222233
+client.focused_inactive #000000 #000000 #bbbbbb #222233   #222233
+client.unfocused        #000000 #000000 #bbbbbb #222233   #222233
+client.urgent           #000000 #000000 #bbbbbb #222233   #222233
 default_border normal 0
 
 
