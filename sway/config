@@ -248,15 +248,3 @@ include /etc/sway/config.d/*
 gaps outer 0
 
 
-bar {
-    position bottom
-    height 20
-
-    status_command "while true; do echo \"BAT: $(acpi -b | awk -F', ' '{print $2}') | $(date +'%Y-%m-%d %X')\"; sleep 1; done"
-
-    colors {
-        statusline #ffffff
-        background #000000
-        inactive_workspace #00000000 #00000000 #5c5c5c
-    }
-}

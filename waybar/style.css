@@ -9,7 +9,7 @@
 }
 
 window#waybar {
-  background-color: #000000; /* Solid black bar background */
+  background-color: #111111; /* Solid black bar background */
   margin: 0px;               /* Sits completely flush with the screen edge */
 }
 
@@ -18,7 +18,6 @@ window#waybar {
   color: @color4; 
 }
 
-/* Modules now blend cleanly into the solid black background */
 .modules-right {
   padding: 8px 0;
   margin-bottom: 2px;
