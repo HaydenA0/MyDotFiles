@@ -433,3 +433,6 @@ function hard_cp()
     fi
   fi
 }
+
+
+echo "≽^•⩊•^≼"

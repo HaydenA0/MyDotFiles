@@ -5,7 +5,8 @@ return {
 		vim.api.nvim_set_hl(0, "OilDir", { fg = "#ebcb8b", bold = true })
 
 		require("oil").setup({
-			columns = { "permissions", "size", "ctime", "icon" },
+			-- columns = { "permissions", "size", "ctime", "icon" },
+			columns = { "size" },
 			win_options = {
 				winbar = "%#OilDir# %{v:lua.require('oil').get_current_dir()}",
 			},
