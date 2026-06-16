@@ -6,7 +6,7 @@ return {
 
 		require("oil").setup({
 			-- columns = { "permissions", "size", "ctime", "icon" },
-			columns = { "size" },
+			columns = { "permissions", "size" },
 			win_options = {
 				winbar = "%#OilDir# %{v:lua.require('oil').get_current_dir()}",
 			},

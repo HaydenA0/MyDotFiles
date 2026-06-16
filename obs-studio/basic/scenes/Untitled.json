@@ -12,7 +12,7 @@
         "mixers": 255,
         "sync": 0,
         "flags": 0,
-        "volume": 0.506986141204834,
+        "volume": 0.0,
         "balance": 0.5,
         "enabled": true,
         "muted": false,
@@ -66,11 +66,11 @@
         {
             "prev_ver": 536936450,
             "name": "Screen Capture (PipeWire)",
-            "uuid": "3e7ec227-98ff-4771-ad89-f88137bf0241",
+            "uuid": "6ac7c79f-12ba-4bd2-af0d-1064938be1eb",
             "id": "pipewire-screen-capture-source",
             "versioned_id": "pipewire-screen-capture-source",
             "settings": {
-                "RestoreToken": "14325cd6-a31b-42a3-a362-10d1323c254a"
+                "RestoreToken": "23c35121-78d0-4b8e-8241-54ff934737ec"
             },
             "mixers": 0,
             "sync": 0,
@@ -96,12 +96,12 @@
             "id": "scene",
             "versioned_id": "scene",
             "settings": {
-                "id_counter": 1,
+                "id_counter": 3,
                 "custom_size": false,
                 "items": [
                     {
                         "name": "Screen Capture (PipeWire)",
-                        "source_uuid": "3e7ec227-98ff-4771-ad89-f88137bf0241",
+                        "source_uuid": "6ac7c79f-12ba-4bd2-af0d-1064938be1eb",
                         "visible": true,
                         "locked": false,
                         "rot": 0.0,
@@ -117,7 +117,7 @@
                         "crop_top": 0,
                         "crop_right": 0,
                         "crop_bottom": 0,
-                        "id": 1,
+                        "id": 3,
                         "group_item_backup": false,
                         "pos": {
                             "x": 0.0,
@@ -169,8 +169,8 @@
             "push-to-talk-delay": 0,
             "hotkeys": {
                 "OBSBasic.SelectScene": [],
-                "libobs.show_scene_item.1": [],
-                "libobs.hide_scene_item.1": []
+                "libobs.show_scene_item.3": [],
+                "libobs.hide_scene_item.3": []
             },
             "deinterlace_mode": 0,
             "deinterlace_field_order": 0,

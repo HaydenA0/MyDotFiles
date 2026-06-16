@@ -434,5 +434,74 @@ function hard_cp()
   fi
 }
 
+tman() {
+    local memtotal_kb memfree_kb buffers_kb cached_kb used_gb
+
+    echo "APP    TOTAL MEMORY (MB)"
+
+    ps -eo comm,rss --no-headers | \
+    awk '
+      { app[$1] += $2/1024 }
+      END {
+        for (n in app)
+          if (app[n] > 0) printf "%-8s %.2f\n", n, app[n]
+      }' | sort -k2 -n
+
+    echo ""
+
+    read memtotal_kb memfree_kb buffers_kb cached_kb <<< "$(awk '
+        /^MemTotal:/ { T=$2 }
+        /^MemFree:/  { F=$2 }
+        /^Buffers:/  { B=$2 }
+        /^Cached:/   { C=$2 }
+        END { print T, F, B, C }
+    ' /proc/meminfo)"
+    used_gb=$(awk \
+      -v T="$memtotal_kb" -v F="$memfree_kb" -v B="$buffers_kb" -v C="$cached_kb" \
+      'BEGIN {
+         used_kb = T - F - B - C
+         used_gb  = used_kb/1024/1024
+         printf "%d", used_gb + 0.5
+      }'
+    )
+
+    echo "app mem"
+    echo "-------"
+    echo "MEM USAGE : $used_gb/24.0 GB"
+}
+
+
+myzip()
+{
+  if [[ $1 == "-dc" ]]; then
+    local file=$2
+    if [[ $file != *.zip ]]; then
+      echo "Error: expected a .zip file" >&2
+      return 1
+    fi
+    local dir="${file%.zip}"
+    mkdir -p "$dir" && unzip "$file" -d "$dir"
+  elif [[ $1 == "-o" ]]; then
+    local output=$2
+    if [[ $output != *.zip ]]; then
+      echo "Error: output must end with .zip" >&2
+      return 1
+    fi
+    shift 2
+    if [[ $1 != "-c" ]]; then
+      echo "Error: expected -c flag after output file" >&2
+      return 1
+    fi
+    shift
+    zip "$output" "$@"
+  else
+    echo "Usage: myzip -dc file.zip    (extract)"
+    echo "       myzip -o out.zip -c f1 f2 ... (create)"
+    return 1
+  fi
+}
+
+
+
 
 echo "≽^•⩊•^≼"

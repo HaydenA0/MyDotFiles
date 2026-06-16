@@ -15,13 +15,14 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term kitty
+set $term foot
 # Your preferred application launcher
 set $menu "vicinae toggle"
 
 exec "vicinae server"
 exec "awww-daemon"
 exec "waybar"
+
 
 ### Output configuration
 #
