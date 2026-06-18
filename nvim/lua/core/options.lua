@@ -8,8 +8,8 @@ vim.opt.relativenumber = true
 -- vim.opt.signcolumn = "no"
 vim.opt.fillchars:append({ eob = " " })
 vim.opt.tabstop = 8
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 vim.diagnostic.config({ virtual_text = true, severity_sort = true, signs = true, underline = true })

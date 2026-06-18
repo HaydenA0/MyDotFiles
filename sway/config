@@ -22,6 +22,7 @@ set $menu "vicinae toggle"
 exec "vicinae server"
 exec "awww-daemon"
 exec "waybar"
+exec /home/anasr/.config/sway/sway-fullscreen-remember.sh
 
 
 ### Output configuration
@@ -98,15 +99,15 @@ input * {
 # Moving around:
 #
     # Move your focus around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
+    bindsym $mod+$left mark _movement; fullscreen disable; unmark _movement; focus left
+    bindsym $mod+$down mark _movement; fullscreen disable; unmark _movement; focus down
+    bindsym $mod+$up mark _movement; fullscreen disable; unmark _movement; focus up
+    bindsym $mod+$right mark _movement; fullscreen disable; unmark _movement; focus right
     # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
+    bindsym $mod+Left mark _movement; fullscreen disable; unmark _movement; focus left
+    bindsym $mod+Down mark _movement; fullscreen disable; unmark _movement; focus down
+    bindsym $mod+Up mark _movement; fullscreen disable; unmark _movement; focus up
+    bindsym $mod+Right mark _movement; fullscreen disable; unmark _movement; focus right
 
     # Move the focused window with the same, but add Shift
     bindsym $mod+Shift+$left move left
@@ -155,7 +156,7 @@ input * {
     # bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+s focus right
+    bindsym $mod+s mark _movement; fullscreen disable; unmark _movement; focus right
     bindsym $mod+Tab layout toggle tabbed split
     # bindsym $mod+e layout toggle split
 
@@ -169,7 +170,7 @@ input * {
     bindsym $mod+space focus mode_toggle
 
     # Move focus to the parent container
-    bindsym $mod+a focus left
+    bindsym $mod+a mark _movement; fullscreen disable; unmark _movement; focus left
 #
 # Scratchpad:
 #

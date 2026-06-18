@@ -117,6 +117,8 @@ alias night="gammastep -O 3000"
 alias pdf='brave-browser "$(fd . -e pdf | fzf)"'
 alias fonts="fc-list : family"
 alias disco="discord --enable-features=UseOzonePlatform --ozone-platform=wayland"
+alias bsize="du -sbh"
+alias codetype="cloc"
 
 
 
@@ -222,24 +224,6 @@ EOF
 }
 
 
-function cpex()
-{
-    if (( $# == 0 )); then
-      echo "Usage: cptype <ext1> [ext2] ..."
-      return 1
-    fi
-
-    local fd_args=()
-    for ext; do
-        fd_args+=(-e "$ext")
-    done
-
-    fd "${fd_args[@]}" -0 | while IFS= read -r -d '' file; do
-        echo "// $file"
-        cat "$file"
-        echo ""
-    done | wl-copy
-}
 
 function mkvenv() {
   uv venv
@@ -471,37 +455,178 @@ tman() {
 }
 
 
-myzip()
+
+delete() {
+  mkdir -p ~/.trash
+  for f in "$@"; do
+    mv "$f" ~/.trash
+    echo "Moved $f to ~/.trash"
+  done
+}
+
+cpex()
 {
-  if [[ $1 == "-dc" ]]; then
-    local file=$2
-    if [[ $file != *.zip ]]; then
-      echo "Error: expected a .zip file" >&2
-      return 1
+  local mode="ext" dirs=() files=() exts=() tree_depth= args=()
+
+  local expect_depth=0
+  for arg in "$@"; do
+    if [[ $expect_depth == 1 ]]; then
+      if [[ $arg =~ ^[0-9]+$ ]]; then
+        tree_depth=$arg
+      else
+        args+=("$arg")
+      fi
+      expect_depth=0
+    elif [[ $arg == "-t" ]]; then
+      tree_depth=4
+      expect_depth=1
+    else
+      args+=("$arg")
     fi
-    local dir="${file%.zip}"
-    mkdir -p "$dir" && unzip "$file" -d "$dir"
-  elif [[ $1 == "-o" ]]; then
-    local output=$2
-    if [[ $output != *.zip ]]; then
-      echo "Error: output must end with .zip" >&2
-      return 1
-    fi
-    shift 2
-    if [[ $1 != "-c" ]]; then
-      echo "Error: expected -c flag after output file" >&2
-      return 1
-    fi
-    shift
-    zip "$output" "$@"
-  else
-    echo "Usage: myzip -dc file.zip    (extract)"
-    echo "       myzip -o out.zip -c f1 f2 ... (create)"
+  done
+
+  set -- "${args[@]}"
+
+  if (( $# == 0 )); then
+    echo "Usage: cpex [-t [n]] <ext1> [ext2] ..." >&2
+    echo "       cpex [-t [n]] -d <dir> ... -e <ext1> ..." >&2
+    echo "       cpex [-t [n]] -f <file> ... -e <ext1> ..." >&2
     return 1
   fi
+
+  if [[ $1 == "-d" ]]; then
+    mode="dir"
+    shift
+    while (( $# > 0 )) && [[ $1 != "-e" ]]; do dirs+=("$1"); shift; done
+    [[ $1 == "-e" ]] && shift
+    while (( $# > 0 )); do exts+=("$1"); shift; done
+  elif [[ $1 == "-f" ]]; then
+    mode="file"
+    shift
+    while (( $# > 0 )) && [[ $1 != "-e" ]]; do files+=("$1"); shift; done
+    [[ $1 == "-e" ]] && shift
+    while (( $# > 0 )); do exts+=("$1"); shift; done
+  else
+    exts=("$@")
+  fi
+
+  local fd_args=(--type f)
+  for ext in "${exts[@]}"; do fd_args+=(-e "$ext"); done
+
+  {
+    if [[ -n $tree_depth ]]; then
+      tree -a -L "$tree_depth"
+      echo ""
+    fi
+    if [[ $mode == "ext" ]]; then
+      fd "${fd_args[@]}" -0
+    elif [[ $mode == "dir" ]]; then
+      for dir in "${dirs[@]}"; do
+        fd "${fd_args[@]}" . "$dir" -0
+      done
+    elif [[ $mode == "file" ]]; then
+      for f in "${files[@]}"; do printf '%s\0' "$f"; done
+      if (( ${#exts[@]} > 0 )); then
+        fd "${fd_args[@]}" -0
+      fi
+    fi
+  } | while IFS= read -r -d '' file; do
+    echo "// $file"
+    cat "$file"
+    echo ""
+  done | wl-copy
 }
 
 
 
 
 echo "≽^•⩊•^≼"
+
+
+myzip()
+{
+  local -A ext_map extract_cmds create_cmds list_cmds
+  ext_map=(
+    .zip      zip
+    .7z       7z
+    .tar.gz   targz
+    .tgz      targz
+    .tar.bz2  tarbz2
+    .tbz2     tarbz2
+    .tar.xz   tarxz
+    .txz      tarxz
+    .tar.zst  tarzst
+    .tzst     tarzst
+  )
+  extract_cmds=(
+    zip     "unzip \"\$file\" -d \"\$dir\""
+    7z      "7z x \"\$file\" -o\"\$dir\""
+    targz   "mkdir -p \"\$dir\" && tar -xzf \"\$file\" -C \"\$dir\""
+    tarbz2  "mkdir -p \"\$dir\" && tar -xjf \"\$file\" -C \"\$dir\""
+    tarxz   "mkdir -p \"\$dir\" && tar -xJf \"\$file\" -C \"\$dir\""
+    tarzst  "mkdir -p \"\$dir\" && tar --zstd -xf \"\$file\" -C \"\$dir\""
+  )
+  create_cmds=(
+    zip     "zip \"\$output\" \$@"
+    7z      "7z a \"\$output\" \$@"
+    targz   "tar -czvf \"\$output\" \$@"
+    tarbz2  "tar -cjvf \"\$output\" \$@"
+    tarxz   "tar -cJvf \"\$output\" \$@"
+    tarzst  "tar --zstd -cvf \"\$output\" \$@"
+  )
+  list_cmds=(
+    zip     "unzip -l \"\$file\""
+    7z      "7z l \"\$file\""
+    targz   "tar -tzf \"\$file\""
+    tarbz2  "tar -tjf \"\$file\""
+    tarxz   "tar -tJf \"\$file\""
+    tarzst  "tar --zstd -tf \"\$file\""
+  )
+
+  local file ext type dir output e
+
+  __myzip_check_name()
+  {
+    if [[ ! $1 =~ ^[a-zA-Z0-9._/-]+$ ]]; then
+      echo "Error: filename contains spaces or special characters: $1" >&2
+      return 1
+    fi
+  }
+
+  __myzip_detect()
+  {
+    for e in ${(k)ext_map}; do
+      if [[ $1 == *$e ]]; then ext=$e; type=$ext_map[$e]; return 0; fi
+    done
+    echo "Error: unsupported archive: $1" >&2
+    return 1
+  }
+
+  if [[ $1 == "-l" ]]; then
+    file=$2
+    __myzip_check_name "$file" || return 1
+    __myzip_detect "$file" || return 1
+    eval ${list_cmds[$type]}
+  elif [[ $1 == "-o" ]]; then
+    output=$2
+    __myzip_check_name "$output" || return 1
+    __myzip_detect "$output" || { echo "Error: unsupported output extension" >&2; return 1; }
+    shift 2
+    if [[ $1 != "-i" ]]; then echo "Error: expected -i flag after output file" >&2; return 1; fi
+    shift
+    for f in "$@"; do __myzip_check_name "$f" || return 1; done
+    eval ${create_cmds[$type]}
+  elif [[ $1 == "-"* ]]; then
+    echo "Usage: myzip archive.ext           (extract)"
+    echo "       myzip -o out.ext -i f1...   (create)"
+    echo "       myzip -l archive.ext        (list)"
+    return 1
+  else
+    file=$1
+    __myzip_check_name "$file" || return 1
+    __myzip_detect "$file" || return 1
+    dir="${file%$ext}"
+    mkdir -p "$dir" && eval ${extract_cmds[$type]}
+  fi
+}
+export _JAVA_AWT_WM_NONREPARENTING=1
