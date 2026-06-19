@@ -4,7 +4,7 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 vim.o.ttimeoutlen = 10
 vim.opt.relativenumber = true
--- vim.opt.numberwidth = 3
+vim.opt.numberwidth = 3
 -- vim.opt.signcolumn = "no"
 vim.opt.fillchars:append({ eob = " " })
 vim.opt.tabstop = 8
@@ -23,22 +23,14 @@ vim.opt.cmdheight = 0
 vim.opt.undofile = true -- BIG ONE solves a lot of my problems
 
 vim.api.nvim_create_autocmd("FileType", {
-	callback = function()
-		local bufnr = vim.api.nvim_get_current_buf()
-		-- Check if a treesitter parser exists for this filetype
-		local lang = vim.treesitter.language.get_lang(vim.bo.filetype)
-		if lang then
-			-- Start treesitter; pcall prevents errors on unsupported files
-			pcall(vim.treesitter.start, bufnr, lang)
-		end
-	end,
-})
+	-- If you have a specific pattern here, you can remove it or keep it as "*"
+	callback = function(args)
+		-- 1. Resolve the filetype to its associated Tree-sitter language name
+		local lang = vim.treesitter.language.get_lang(args.match)
 
-vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "FocusLost" }, {
-	callback = function()
-		-- Only save if the buffer is modifiable and has a file name
-		if vim.bo.modified and not vim.bo.readonly and vim.fn.expand("%") ~= "" then
-			vim.cmd("silent! update")
+		-- 2. Verify if the parser actually exists and is loadable
+		if lang and vim.treesitter.language.add(lang) then
+			vim.treesitter.start(args.buf, lang)
 		end
 	end,
 })

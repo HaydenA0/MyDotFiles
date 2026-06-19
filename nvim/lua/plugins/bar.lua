@@ -20,7 +20,7 @@ return {
 					statusline = 1000,
 					tabline = 1000,
 					winbar = 1000,
-					refresh_time = 16,
+					refresh_time = 16, -- ~60fps
 					events = {
 						"WinEnter",
 						"BufEnter",
@@ -59,33 +59,6 @@ return {
 			winbar = {},
 			inactive_winbar = {},
 			extensions = {},
-		})
-
-		local uv = vim.uv or vim.loop
-		local hide_timer = uv.new_timer()
-		local is_hidden = false
-
-		local function show_statusline()
-			if is_hidden then
-				require("lualine").hide({ place = { "statusline" }, unhide = true })
-				is_hidden = false
-			end
-		end
-
-		local function handle_activity()
-			if not is_hidden then
-				require("lualine").hide({ place = { "statusline" }, unhide = false })
-				is_hidden = true
-			end
-
-			hide_timer:stop()
-			hide_timer:start(4000, 0, vim.schedule_wrap(show_statusline))
-		end
-
-		local lualine_hide_group = vim.api.nvim_create_augroup("LualineAutoHide", { clear = true })
-		vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "InsertEnter", "TextChanged", "TextChangedI" }, {
-			group = lualine_hide_group,
-			callback = handle_activity,
 		})
 	end,
 }
