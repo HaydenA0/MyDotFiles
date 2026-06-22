@@ -23,6 +23,8 @@ exec "vicinae server"
 exec "awww-daemon"
 exec "waybar"
 exec /home/anasr/.config/sway/sway-fullscreen-remember.sh
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway XDG_SESSION_TYPE=wayland
+exec systemctl --user start sway-session.target
 
 
 ### Output configuration

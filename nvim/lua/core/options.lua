@@ -12,7 +12,13 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
-vim.diagnostic.config({ virtual_text = true, severity_sort = true, signs = true, underline = true })
+vim.diagnostic.config({
+	virtual_text = false,
+	virtual_lines = true,
+	severity_sort = true,
+	signs = false,
+	underline = false,
+})
 vim.lsp.inlay_hint.enable(true, { bufnr = 0 })
 
 vim.opt.ignorecase = true

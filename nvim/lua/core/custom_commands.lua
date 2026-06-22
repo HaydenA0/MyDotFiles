@@ -40,3 +40,14 @@ local function zoxide_to_oil()
 end
 
 vim.keymap.set("n", "<leader>j", zoxide_to_oil, { desc = "Zoxide Teleport to Oil" })
+
+vim.api.nvim_create_user_command("CurrentServer", function()
+	local clients = vim.lsp.get_clients({ bufnr = 0 })
+	if #clients == 0 then
+		print("No LSP clients attached")
+	else
+		for _, client in ipairs(clients) do
+			print(client.name)
+		end
+	end
+end, {})

@@ -26,7 +26,6 @@ return {
 				keymap("n", "gi", vim.lsp.buf.implementation, { buffer = args.buf, desc = "LSP Implementation" })
 				keymap("n", "grn", function()
 					vim.lsp.buf.rename()
-					-- Wait briefly for the LSP to apply changes, then write all modified buffers
 					vim.defer_fn(function()
 						vim.cmd("silent! wa")
 					end, 100)
@@ -42,21 +41,23 @@ return {
 
 		vim.lsp.config("gdscript", {
 			cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
-			filetypes = { "gd", "gdscript", "gdscript3", "gdshader" },
+			root_markers = { "project.godot", ".git" },
+			filetypes = { "gd", "gdscript", "gdscript3" },
+		})
+		vim.lsp.config("gdshader_lsp", {
+			cmd = {
+				vim.fn.expand("/home/anasr/dev/clones/gdshader-lsp-cpp/bin/linux/release/gdshader_lsp_release_linux"),
+				"--stdio",
+			},
+			filetypes = { "gdshader", "gdshaderinc" },
 			root_markers = { "project.godot", ".git" },
 		})
+		vim.lsp.enable("gdshader_lsp")
 
 		vim.lsp.config("lua_ls", {
 			settings = { Lua = { diagnostics = { globals = { "vim" } } } },
 		})
 
 		vim.lsp.enable(to_install)
-		-- vim.lsp.enable("gdshader_lsp")
-		vim.lsp.enable("glasgow")
-		vim.lsp.enable("slangd")
-
-		-- if vim.fn.filereadable("project.godot") == 1 then
-		-- 	vim.fn.serverstart("./godot.pipe")
-		-- end
 	end,
 }
